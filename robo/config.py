@@ -4,6 +4,7 @@ Para mudar temas, horários ou anunciantes, edite só este arquivo.
 """
 
 AUTOR = "Higor Siqueira"
+FOTO_AUTOR = "assets/higor.jpg"  # foto redonda no rodapé; deixe "" para não usar
 PERFIL = "@constroigo"
 
 # Cada horário tem um tema e as buscas usadas no Google Notícias.
@@ -40,7 +41,7 @@ HORARIOS = {
 # Faixa "Oferecimento": um anunciante por post, em rodízio.
 # Para usar a logo, coloque o arquivo em assets/patrocinadores/ e preencha "logo".
 PATROCINADORES = [
-    {"nome": "H2R Engenharia", "logo": ""},
+    {"nome": "H2R Engenharia", "logo": "assets/patrocinadores/h2r.png"},
     {"nome": "Siqueira Locação", "logo": ""},
     {"nome": "Histórias Helvecia", "logo": ""},
 ]

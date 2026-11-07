@@ -59,9 +59,12 @@
         <svg viewBox="0 0 200 200" width="64" height="64"><rect x="30" y="134" width="44" height="44" rx="8" fill="#FFFFFF"/><rect x="82" y="134" width="44" height="44" rx="8" fill="#FFFFFF"/><rect x="134" y="134" width="44" height="44" rx="8" fill="#FFFFFF"/><rect x="82" y="82" width="44" height="44" rx="8" fill="#9DB7E0"/><rect x="134" y="82" width="44" height="44" rx="8" fill="#9DB7E0"/><rect x="134" y="30" width="44" height="44" rx="8" fill="#F2B705"/></svg>
         <span class="nome">constrói</span><span class="go">GO</span>
       </div>
-      <div class="credito">
-        <span class="autor">Por {{ autor }}</span>
-        <span class="fonte">Fonte: {{ fonte }}</span>
+      <div style="display: flex; align-items: center; gap: 18px">
+        <div class="credito">
+          <span class="autor">Por {{ autor }}</span>
+          <span class="fonte">Fonte: {{ fonte }}</span>
+        </div>
+        {% if foto_uri %}<img src="{{ foto_uri }}" alt="" style="width: 76px; height: 76px; border-radius: 50%; border: 3px solid #F2B705; object-fit: cover">{% endif %}
       </div>
     </div>
   </div>

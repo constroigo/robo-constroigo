@@ -9,7 +9,9 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup, escape
 from playwright.sync_api import sync_playwright
 
-from .config import AUTOR
+from .config import AUTOR, FOTO_AUTOR
+
+FOTO = Path(FOTO_AUTOR)
 
 MESES = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
 
@@ -46,6 +48,7 @@ def gerar_arte(post: dict, patrocinador: dict | None, destino: Path, quando: dat
         resumo=post["resumo"],
         fonte=post["noticia"]["fonte"] or "imprensa",
         autor=AUTOR,
+        foto_uri=FOTO.resolve().as_uri() if FOTO.exists() else "",
         patrocinador=patrocinador,
         tam_destaque=tam_destaque,
         tam_manchete=tam_manchete,
