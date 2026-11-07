@@ -9,7 +9,7 @@ Robô que publica no Instagram **@constroigo** notícias da construção civil e
    - **Meio-dia:** infraestrutura, energia e saneamento
    - **Fim da tarde:** obras, máquinas e tecnologia
 2. O **Gemini** escolhe a notícia mais relevante para Goiás e escreve manchete, resumo e legenda, usando só o que está na notícia.
-3. O robô gera a arte (1080 × 1350) com a marca, o "Por Higor Siqueira", a fonte e a faixa **Oferecimento** (rodízio entre H2R Engenharia, Siqueira Locação e Histórias Helvecia).
+3. O robô gera a arte (1080 × 1350) com a marca, o "Por Higor Siqueira", a fonte e a faixa **Oferecimento** (rodízio entre H2R Engenharia, Siqueira Locação, Histórias Helvécia e H2R Incorp).
 4. Abre um pedido de aprovação na aba **Issues**, com a arte e a legenda. O app do GitHub avisa no celular.
 5. Você responde **ok** para publicar ou **não** para descartar.
 
