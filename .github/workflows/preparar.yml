@@ -1,0 +1,78 @@
+name: Preparar post
+
+on:
+  schedule:
+    # Horários em UTC. Brasília = UTC-3.
+    - cron: "37 10 * * *"   # 07:37 — manhã
+    - cron: "52 14 * * *"   # 11:52 — meio-dia
+    - cron: "47 20 * * *"   # 17:47 — fim da tarde
+  workflow_dispatch:
+    inputs:
+      horario:
+        description: "Qual horário gerar agora"
+        type: choice
+        options: [manha, meiodia, tarde]
+        default: manha
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: robo-constroigo
+  cancel-in-progress: false
+
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Definir horário
+        id: hora
+        run: |
+          case "${{ github.event.schedule }}" in
+            "37 10 * * *") H=manha ;;
+            "52 14 * * *") H=meiodia ;;
+            "47 20 * * *") H=tarde ;;
+            *) H="${{ inputs.horario }}" ;;
+          esac
+          echo "horario=${H:-manha}" >> "$GITHUB_OUTPUT"
+
+      - name: Buscar notícia, escrever e gerar a arte
+        id: prep
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+        run: python -m robo.preparar "${{ steps.hora.outputs.horario }}"
+
+      - name: Salvar no repositório
+        if: steps.prep.outputs.pasta != ''
+        run: |
+          git config user.name "robo-constroigo"
+          git config user.email "robo@users.noreply.github.com"
+          git add posts data
+          git commit -m "Post ${{ steps.prep.outputs.pasta }}"
+          git push
+
+      - name: Pedir aprovação (ou publicar direto)
+        if: steps.prep.outputs.pasta != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          AUTO_PUBLICAR: ${{ vars.AUTO_PUBLICAR }}
+        run: |
+          sleep 20
+          python -m robo.aprovacao "${{ steps.prep.outputs.pasta }}"

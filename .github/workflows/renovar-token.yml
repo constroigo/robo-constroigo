@@ -1,0 +1,29 @@
+name: Renovar token do Instagram
+
+on:
+  schedule:
+    - cron: "13 12 1,15 * *"   # dias 1 e 15, 09:13 de Brasília
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  renovar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests==2.32.3 PyNaCl==1.5.0
+      - name: Renovar
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
+        run: |
+          if [ -z "$GH_SECRETS_TOKEN" ]; then
+            echo "GH_SECRETS_TOKEN não configurado; renovação automática desligada."
+            exit 0
+          fi
+          python -m robo.renovar

@@ -1,0 +1,62 @@
+"""Publicação pela API do Instagram (login do Instagram, sem Página do Facebook)."""
+
+import os
+import time
+
+import requests
+
+API = "https://graph.instagram.com"
+
+
+def publicar_imagem(url_imagem: str, legenda: str) -> str:
+    token = os.environ["IG_ACCESS_TOKEN"]
+    usuario = os.environ.get("IG_USER_ID") or "me"
+
+    r = requests.post(
+        f"{API}/{usuario}/media",
+        data={"image_url": url_imagem, "caption": legenda, "access_token": token},
+        timeout=60,
+    )
+    if not r.ok:
+        raise RuntimeError(f"Erro ao criar a mídia: {r.status_code} {r.text}")
+    container = r.json()["id"]
+
+    # Espera o Instagram terminar de baixar e processar a imagem.
+    for _ in range(20):
+        s = requests.get(
+            f"{API}/{container}",
+            params={"fields": "status_code", "access_token": token},
+            timeout=30,
+        ).json()
+        if s.get("status_code") == "FINISHED":
+            break
+        if s.get("status_code") == "ERROR":
+            raise RuntimeError(f"O Instagram recusou a imagem: {s}")
+        time.sleep(5)
+
+    r = requests.post(
+        f"{API}/{usuario}/media_publish",
+        data={"creation_id": container, "access_token": token},
+        timeout=60,
+    )
+    if not r.ok:
+        raise RuntimeError(f"Erro ao publicar: {r.status_code} {r.text}")
+    media_id = r.json()["id"]
+
+    link = requests.get(
+        f"{API}/{media_id}",
+        params={"fields": "permalink", "access_token": token},
+        timeout=30,
+    ).json()
+    return link.get("permalink", media_id)
+
+
+def renovar_token() -> str:
+    """Renova o token de longa duração (vale 60 dias; precisa ter mais de 24 h)."""
+    r = requests.get(
+        f"{API}/refresh_access_token",
+        params={"grant_type": "ig_refresh_token", "access_token": os.environ["IG_ACCESS_TOKEN"]},
+        timeout=30,
+    )
+    r.raise_for_status()
+    return r.json()["access_token"]
