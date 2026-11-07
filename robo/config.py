@@ -47,6 +47,16 @@ PATROCINADORES = [
     {"nome": "H2R Incorp", "logo": "assets/patrocinadores/h2r-incorp.png"},
 ]
 
+# Anunciante preferido por assunto do post (o resto entra em rodízio).
+PATROCINADOR_POR_CATEGORIA = {
+    "INFRAESTRUTURA": "Siqueira Locação",
+    "MÁQUINAS E EQUIPAMENTOS": "Siqueira Locação",
+    "SANEAMENTO": "Siqueira Locação",
+    "MERCADO IMOBILIÁRIO": "Histórias Helvécia",
+    "OBRAS": "H2R Engenharia",
+    "MERCADO DE TRABALHO": "H2R Engenharia",
+}
+
 HASHTAGS_FIXAS = ["#constroigo", "#construcaocivil", "#goias", "#goiania", "#engenharia"]
 
 # Só considera notícias publicadas nas últimas X horas.

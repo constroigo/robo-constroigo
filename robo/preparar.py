@@ -12,14 +12,18 @@ from zoneinfo import ZoneInfo
 
 from . import noticias, redacao
 from .arte import gerar_arte
-from .config import HORARIOS, PATROCINADORES
+from .config import HORARIOS, PATROCINADOR_POR_CATEGORIA, PATROCINADORES
 
 FUSO = ZoneInfo("America/Sao_Paulo")
 
 
-def escolher_patrocinador(quando: datetime, horario: str) -> dict | None:
+def escolher_patrocinador(quando: datetime, horario: str, categoria: str = "") -> dict | None:
     if not PATROCINADORES:
         return None
+    preferido = PATROCINADOR_POR_CATEGORIA.get(categoria.upper())
+    for p in PATROCINADORES:
+        if p["nome"] == preferido:
+            return p
     ordem = list(HORARIOS).index(horario)
     indice = (quando.timetuple().tm_yday * len(HORARIOS) + ordem) % len(PATROCINADORES)
     return PATROCINADORES[indice]
@@ -47,7 +51,7 @@ def main() -> None:
         return
 
     post = redacao.escrever_post(lista, conf["rotulo"])
-    patrocinador = escolher_patrocinador(agora, horario)
+    patrocinador = escolher_patrocinador(agora, horario, post.get("categoria", ""))
 
     pasta = Path("posts") / f"{agora:%Y-%m-%d}-{horario}"
     gerar_arte(post, patrocinador, pasta / "post.jpg", agora)
