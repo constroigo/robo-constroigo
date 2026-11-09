@@ -82,7 +82,12 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
     post["resumo"] = post["resumo"].strip()[:180]
 
     tags = [t if t.startswith("#") else "#" + t for t in post.get("hashtags", [])]
-    todas = list(dict.fromkeys(tags + HASHTAGS_FIXAS))[:10]
+    vistas, todas = set(), []
+    for t in tags + HASHTAGS_FIXAS:
+        if t.lower() not in vistas:
+            vistas.add(t.lower())
+            todas.append(t)
+    todas = todas[:10]
     post["legenda_final"] = (
         f"{post['legenda'].strip()}\n\n"
         f"✍️ Por {AUTOR}\n"
