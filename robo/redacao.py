@@ -2,13 +2,14 @@
 
 import json
 import os
+import time
 
 import requests
 
 from .config import AUTOR, HASHTAGS_FIXAS
 
 # Modelos tentados em ordem (a variável GEMINI_MODEL, se existir, vem primeiro).
-MODELOS = [m for m in [os.environ.get("GEMINI_MODEL", "").strip(), "gemini-flash-latest", "gemini-2.5-flash"] if m]
+MODELOS = [m for m in [os.environ.get("GEMINI_MODEL", "").strip(), "gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"] if m]
 
 INSTRUCOES = """Você é o editor do perfil de Instagram "Constrói GO", assinado por {autor},
 engenheiro civil em Goiânia. O público são engenheiros, construtoras, fornecedores e
@@ -52,7 +53,10 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
     )
     prompt = INSTRUCOES.format(autor=AUTOR, tema=tema, lista=lista)
     texto, erros = None, []
-    for modelo in MODELOS:
+    tentativas = [(m, t) for t in range(3) for m in MODELOS]
+    for modelo, rodada in tentativas:
+        if rodada:
+            time.sleep(20)
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent"
         resp = requests.post(
             url,
