@@ -7,7 +7,8 @@ import requests
 
 from .config import AUTOR, HASHTAGS_FIXAS
 
-MODELO = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+# Modelos tentados em ordem (a variável GEMINI_MODEL, se existir, vem primeiro).
+MODELOS = [m for m in [os.environ.get("GEMINI_MODEL", "").strip(), "gemini-flash-latest", "gemini-2.5-flash"] if m]
 
 INSTRUCOES = """Você é o editor do perfil de Instagram "Constrói GO", assinado por {autor},
 engenheiro civil em Goiânia. O público são engenheiros, construtoras, fornecedores e
@@ -50,18 +51,25 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
         for i, n in enumerate(noticias)
     )
     prompt = INSTRUCOES.format(autor=AUTOR, tema=tema, lista=lista)
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{MODELO}:generateContent"
-    resp = requests.post(
-        url,
-        headers={"x-goog-api-key": chave},
-        json={
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {"responseMimeType": "application/json", "temperature": 0.4},
-        },
-        timeout=90,
-    )
-    resp.raise_for_status()
-    texto = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
+    texto, erros = None, []
+    for modelo in MODELOS:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent"
+        resp = requests.post(
+            url,
+            headers={"x-goog-api-key": chave},
+            json={
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {"responseMimeType": "application/json", "temperature": 0.4},
+            },
+            timeout=90,
+        )
+        if resp.ok:
+            texto = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
+            print("Modelo usado:", modelo)
+            break
+        erros.append(f"{modelo}: {resp.status_code} {resp.text[:300]}")
+    if texto is None:
+        raise RuntimeError("O Gemini não respondeu:\n" + "\n".join(erros))
     post = json.loads(texto)
 
     noticia = noticias[int(post["escolhida"])]
