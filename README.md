@@ -20,8 +20,8 @@ Para dispensar a aprovação, crie a variável `AUTO_PUBLICAR` com o valor `sim`
 | Nome | O que é |
 | --- | --- |
 | `GEMINI_API_KEY` | Chave do Google AI Studio (aistudio.google.com › Get API key) |
-| `IG_ACCESS_TOKEN` | Token de longa duração do Instagram (painel de desenvolvedor da Meta) |
-| `IG_USER_ID` | ID da conta do Instagram (opcional; sem ele o robô usa a conta do token) |
+| `IG_ACCESS_TOKEN` | Chave do Instagram gerada no app da Meta (login unificado; começa com EAA e não vence) |
+| `IG_USER_ID` | ID da conta do Instagram (obrigatório no login unificado) |
 | `GH_SECRETS_TOKEN` | Opcional: chave do GitHub com permissão **Secrets: read and write**, para renovar o token do Instagram sozinho a cada 15 dias |
 
 ## Gerar um post agora (teste)

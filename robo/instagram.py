@@ -1,16 +1,24 @@
-"""Publicação pela API do Instagram (login do Instagram, sem Página do Facebook)."""
+"""Publicação pela API do Instagram.
+
+Funciona com os dois tipos de chave:
+- "Login unificado" (apps novos da Meta): chave começa com EAA, não vence e usa
+  graph.facebook.com. Exige IG_USER_ID.
+- "Login do Instagram" (apps antigos): usa graph.instagram.com e vence em 60 dias.
+"""
 
 import os
 import time
 
 import requests
 
-API = "https://graph.instagram.com"
+def _api(token: str) -> str:
+    return "https://graph.facebook.com" if token.startswith("EAA") else "https://graph.instagram.com"
 
 
 def publicar_imagem(url_imagem: str, legenda: str) -> str:
-    token = os.environ["IG_ACCESS_TOKEN"]
-    usuario = os.environ.get("IG_USER_ID") or "me"
+    token = os.environ["IG_ACCESS_TOKEN"].strip()
+    API = _api(token)
+    usuario = (os.environ.get("IG_USER_ID") or "").strip() or "me"
 
     r = requests.post(
         f"{API}/{usuario}/media",
@@ -51,10 +59,16 @@ def publicar_imagem(url_imagem: str, legenda: str) -> str:
     return link.get("permalink", media_id)
 
 
-def renovar_token() -> str:
-    """Renova o token de longa duração (vale 60 dias; precisa ter mais de 24 h)."""
+def renovar_token() -> str | None:
+    """Renova o token de longa duração do login do Instagram (60 dias).
+
+    Chaves do login unificado (EAA...) não vencem; nesse caso não faz nada.
+    """
+    token = os.environ["IG_ACCESS_TOKEN"].strip()
+    if token.startswith("EAA"):
+        return None
     r = requests.get(
-        f"{API}/refresh_access_token",
+        "https://graph.instagram.com/refresh_access_token",
         params={"grant_type": "ig_refresh_token", "access_token": os.environ["IG_ACCESS_TOKEN"]},
         timeout=30,
     )
