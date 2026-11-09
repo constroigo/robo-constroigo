@@ -53,7 +53,7 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{MODELO}:generateContent"
     resp = requests.post(
         url,
-        params={"key": chave},
+        headers={"x-goog-api-key": chave},
         json={
             "contents": [{"parts": [{"text": prompt}]}],
             "generationConfig": {"responseMimeType": "application/json", "temperature": 0.4},
