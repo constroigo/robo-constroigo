@@ -56,14 +56,15 @@ CATEGORIA_PIXABAY = {
     "TECNOLOGIA": "industry", "ECONOMIA": "business", "MERCADO DE TRABALHO": "industry",
 }
 
-VERIFICACAO = """Você avalia fotos para um perfil profissional de engenharia civil no Brasil.
-A foto vai ilustrar esta notícia: "{tema}".
-Responda APROVADA somente se TODAS forem verdade:
-1) combina com o tema (construção, obra, infraestrutura, energia, imóveis ou economia, conforme a notícia);
-2) se houver trabalhadores, estão com capacete/EPI e em situação segura (nada de chinelo, sem capacete, risco);
-3) não tem texto legível em outro idioma, marcas em destaque nem cenário claramente de outro país (placas asiáticas etc.);
-4) é uma foto de boa qualidade, sem turistas ou pessoas em primeiro plano sem relação com o tema.
-Responda só APROVADA ou REPROVADA."""
+VERIFICACAO = """Esta foto de banco de imagens vai ilustrar, de forma GENÉRICA, uma notícia sobre: "{tema}".
+Não precisa mostrar o lugar exato da notícia; basta ter relação com o assunto geral
+(obra, construção, estrada, máquina, energia, prédio, cidade, economia).
+Só reprove se houver algum destes problemas claros:
+- trabalhador sem capacete/EPI ou em situação insegura em primeiro plano;
+- placas ou textos em idioma asiático/árabe em destaque;
+- assunto sem nenhuma relação com construção, infraestrutura, cidade ou economia;
+- turistas, crianças ou pessoas posando em primeiro plano.
+Responda na primeira palavra OK ou PROBLEMA, e depois o motivo em poucas palavras."""
 
 
 def _aprovada(arquivo: bytes, tema: str) -> bool:
@@ -87,7 +88,7 @@ def _aprovada(arquivo: bytes, tema: str) -> bool:
         if r.ok:
             texto = r.json()["candidates"][0]["content"]["parts"][0].get("text", "").upper()
             print(f"  checagem ({modelo}): {texto.strip()[:60]}")
-            return "APROVADA" in texto and "REPROVADA" not in texto
+            return texto.strip().startswith("OK")
         print(f"  checagem ({modelo}) falhou: {r.status_code} {r.text[:160]}")
     return False  # sem como verificar: melhor publicar sem foto
 
@@ -110,6 +111,8 @@ def pixabay(busca: str, destino: Path, tema: str = "", categoria: str = "") -> d
             img = requests.get(foto["largeImageURL"], timeout=60)
             if not img.ok:
                 continue
+            if os.environ.get("SALVAR_CANDIDATAS"):
+                (destino.parent / f"cand-{foto['id']}.jpg").write_bytes(img.content)
             if not _aprovada(img.content, tema or busca):
                 print("Foto reprovada na checagem:", foto["id"])
                 _marcar(f"pixabay:{foto['id']}")
