@@ -50,6 +50,33 @@ def pexels(busca: str, destino: Path) -> dict | None:
         return None
 
 
+def pixabay(busca: str, destino: Path) -> dict | None:
+    chave = os.environ.get("PIXABAY_API_KEY", "").strip()
+    if not chave or not busca:
+        return None
+    try:
+        r = requests.get(
+            "https://pixabay.com/api/",
+            params={"key": chave, "q": busca, "image_type": "photo", "orientation": "horizontal",
+                    "safesearch": "true", "per_page": 20, "min_width": 1600},
+            timeout=30,
+        )
+        r.raise_for_status()
+        usadas = set(_usadas())
+        fotos = [f for f in r.json().get("hits", []) if f"pixabay:{f['id']}" not in usadas]
+        if not fotos:
+            return None
+        foto = random.choice(fotos[:8])
+        img = requests.get(foto["largeImageURL"], timeout=60)
+        img.raise_for_status()
+        destino.write_bytes(img.content)
+        _marcar(f"pixabay:{foto['id']}")
+        return {"arquivo": destino, "credito": f"Foto: {foto['user']} / Pixabay", "origem": "pixabay"}
+    except requests.RequestException as erro:
+        print("Pixabay indisponível:", erro)
+        return None
+
+
 def _modelos_imagem(chave: str) -> list[str]:
     preferidos = [m for m in [os.environ.get("GEMINI_IMAGE_MODEL", "").strip()] if m]
     try:
@@ -105,7 +132,8 @@ def gemini(descricao: str, destino: Path) -> dict | None:
 
 def obter(post: dict, pasta: Path) -> dict | None:
     pasta.mkdir(parents=True, exist_ok=True)
-    foto = pexels(post.get("busca_foto", ""), pasta / "foto.jpg")
+    busca = post.get("busca_foto", "")
+    foto = pexels(busca, pasta / "foto.jpg") or pixabay(busca, pasta / "foto.jpg")
     # Ilustração do Gemini só se a variável USAR_GEMINI_IMAGEM = sim (exige faturamento da API).
     if not foto and os.environ.get("USAR_GEMINI_IMAGEM", "").lower() == "sim":
         foto = gemini(post.get("descricao_imagem", ""), pasta / "foto.png")
