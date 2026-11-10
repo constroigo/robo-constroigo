@@ -86,7 +86,9 @@ def _aprovada(arquivo: bytes, tema: str) -> bool:
             continue
         if r.ok:
             texto = r.json()["candidates"][0]["content"]["parts"][0].get("text", "").upper()
+            print(f"  checagem ({modelo}): {texto.strip()[:60]}")
             return "APROVADA" in texto and "REPROVADA" not in texto
+        print(f"  checagem ({modelo}) falhou: {r.status_code} {r.text[:160]}")
     return False  # sem como verificar: melhor publicar sem foto
 
 

@@ -1,0 +1,42 @@
+name: Testar fotos
+
+on:
+  workflow_dispatch:
+    inputs:
+      busca:
+        description: "Busca em inglês"
+        default: "highway construction"
+      tema:
+        description: "Tema da notícia"
+        default: "Obras do anel viário da BR-153 em Goiânia"
+      categoria:
+        default: "INFRAESTRUTURA"
+
+permissions:
+  contents: read
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests==2.32.3
+      - env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+        run: |
+          mkdir -p /tmp/t
+          python -c "
+          from pathlib import Path
+          from robo.imagens import pixabay
+          print(pixabay('${{ inputs.busca }}', Path('/tmp/t/f.jpg'), '${{ inputs.tema }}', '${{ inputs.categoria }}'))
+          "
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: foto
+          path: /tmp/t/
+          if-no-files-found: ignore
