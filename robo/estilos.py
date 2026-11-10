@@ -29,6 +29,13 @@ TEMAS = {
         "bloco_a": "#FFFFFF", "bloco_b": "#0F2747", "bloco_c": "#F2B705",
         "go_bg": "#F2B705", "go_fg": "#0F2747", "caixa_bg": "#0F2747", "caixa_fg": "#F2B705",
     },
+    # Fora da rotação: só para posts de alerta/impacto, quando pedido.
+    "vermelho": {
+        "bg": "#B42318", "texto": "#FFFFFF", "sub": "#FBDAD6", "destaque": "#F2B705",
+        "tag_bg": "#FFFFFF", "tag_fg": "#B42318", "linha": "#D2584D",
+        "bloco_a": "#FFFFFF", "bloco_b": "#FBDAD6", "bloco_c": "#F2B705",
+        "go_bg": "#F2B705", "go_fg": "#0F2747", "caixa_bg": "#F2B705", "caixa_fg": "#0F2747",
+    },
 }
 
 # Combinações (tema, layout) que funcionam bem. O robô passa por elas em sequência,
