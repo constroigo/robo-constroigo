@@ -12,8 +12,15 @@ from pathlib import Path
 from . import github, instagram
 
 
-def url_publica(pasta: str) -> str:
-    return f"https://raw.githubusercontent.com/{github.repo()}/main/{pasta}/post.jpg"
+def url_publica(pasta: str, arquivo: str = "post.jpg") -> str:
+    return f"https://raw.githubusercontent.com/{github.repo()}/main/{pasta}/{arquivo}"
+
+
+def _publicar(pasta: str, post: dict) -> str:
+    if (Path(pasta) / "video.mp4").exists():
+        capa = url_publica(pasta) if (Path(pasta) / "post.jpg").exists() else None
+        return instagram.publicar_video(url_publica(pasta, "video.mp4"), post["legenda_final"], capa)
+    return instagram.publicar_imagem(url_publica(pasta), post["legenda_final"])
 
 
 def abrir(pasta: str) -> None:
@@ -21,7 +28,7 @@ def abrir(pasta: str) -> None:
     url = url_publica(pasta)
 
     if os.environ.get("AUTO_PUBLICAR", "").lower() == "sim":
-        link = instagram.publicar_imagem(url, post["legenda_final"])
+        link = _publicar(pasta, post)
         print("Publicado automaticamente:", link)
         return
 
@@ -29,10 +36,13 @@ def abrir(pasta: str) -> None:
     alertas = "".join(f"> ⚠️ {a}\n" for a in post.get("alertas", []))
     if alertas:
         alertas = "**Confira antes de aprovar:**\n" + alertas + "\n"
+    tem_video = (Path(pasta) / "video.mp4").exists()
+    previa = (f"🎬 **Reel:** [assistir o vídeo]({url_publica(pasta, 'video.mp4')})\n\n" if tem_video else "")
     corpo = (
         alertas
-        + f"![arte]({url})\n\n"
-        f"**Legenda:**\n\n```\n{post['legenda_final']}\n```\n\n"
+        + previa
+        + (f"![arte]({url})\n\n" if (Path(pasta) / "post.jpg").exists() else "")
+        + f"**Legenda:**\n\n```\n{post['legenda_final']}\n```\n\n"
         f"**Notícia original:** [{post['noticia']['titulo']}]({post['noticia']['link']}) — "
         f"{post['noticia']['fonte']}\n\n"
         "---\n"
@@ -73,7 +83,7 @@ def responder() -> None:
 
     post = json.loads((Path(pasta) / "post.json").read_text(encoding="utf-8"))
     try:
-        link = instagram.publicar_imagem(url_publica(pasta), post["legenda_final"])
+        link = _publicar(pasta, post)
     except Exception as erro:  # noqa: BLE001
         github.comentar(numero, f"⚠️ Não consegui publicar:\n\n```\n{erro}\n```")
         raise
