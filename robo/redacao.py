@@ -105,6 +105,8 @@ def _revisar(post: dict, noticia: dict, chave: str) -> dict:
             print("Revisão de fatos aplicada.")
         except (ValueError, AttributeError):
             print("Revisão de fatos ignorada (resposta inválida).")
+    else:
+        print("Revisão de fatos indisponível agora; ficou só a checagem de números.")
 
     # Checagem automática: todo número do post precisa existir na fonte.
     fonte = _numeros(noticia["titulo"] + " " + noticia["trecho"])
