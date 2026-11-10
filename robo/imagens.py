@@ -105,6 +105,8 @@ def gemini(descricao: str, destino: Path) -> dict | None:
 
 def obter(post: dict, pasta: Path) -> dict | None:
     pasta.mkdir(parents=True, exist_ok=True)
-    return pexels(post.get("busca_foto", ""), pasta / "foto.jpg") or gemini(
-        post.get("descricao_imagem", ""), pasta / "foto.png"
-    )
+    foto = pexels(post.get("busca_foto", ""), pasta / "foto.jpg")
+    # Ilustração do Gemini só se a variável USAR_GEMINI_IMAGEM = sim (exige faturamento da API).
+    if not foto and os.environ.get("USAR_GEMINI_IMAGEM", "").lower() == "sim":
+        foto = gemini(post.get("descricao_imagem", ""), pasta / "foto.png")
+    return foto
