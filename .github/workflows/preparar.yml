@@ -55,6 +55,9 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GEMINI_IMAGE_MODEL: ${{ vars.GEMINI_IMAGE_MODEL }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          USAR_IMAGENS: ${{ vars.USAR_IMAGENS }}
         run: python -m robo.preparar "${{ steps.hora.outputs.horario }}"
 
       - name: Salvar no repositório

@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from . import noticias, redacao
+from . import imagens, noticias, redacao
 from .arte import gerar_arte
 from .config import HORARIOS, PATROCINADOR_POR_CATEGORIA, PATROCINADORES
 
@@ -55,7 +55,12 @@ def main() -> None:
 
     # Pasta única por execução, para dois posts do mesmo horário não se sobrescreverem.
     pasta = Path("posts") / f"{agora:%Y-%m-%d}-{horario}-{agora:%H%M%S}"
-    gerar_arte(post, patrocinador, pasta / "post.jpg", agora)
+    imagem = imagens.obter(post, pasta) if os.environ.get("USAR_IMAGENS", "sim").lower() != "nao" else None
+    gerar_arte(post, patrocinador, pasta / "post.jpg", agora, imagem=imagem)
+    if imagem:
+        post["imagem"] = {"origem": imagem["origem"], "credito": imagem["credito"]}
+        Path(imagem["arquivo"]).unlink(missing_ok=True)  # só a arte final fica no repositório
+        print("Imagem:", imagem["credito"])
     post["patrocinador"] = patrocinador["nome"] if patrocinador else ""
     post["horario"] = horario
     post["criado_em"] = agora.isoformat()

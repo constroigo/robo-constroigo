@@ -71,7 +71,7 @@ def renderizar(template: str, contexto: dict, estilo: dict, destino: Path) -> Pa
 
 
 def gerar_arte(post: dict, patrocinador: dict | None, destino: Path, quando: datetime,
-               estilo: dict | None = None) -> Path:
+               estilo: dict | None = None, imagem: dict | None = None) -> Path:
     estilo = estilo or proximo_estilo()
     tam_destaque, tam_manchete = _tamanhos(post.get("destaque", ""), post["manchete"])
     contexto = {
@@ -85,4 +85,7 @@ def gerar_arte(post: dict, patrocinador: dict | None, destino: Path, quando: dat
         "tam_destaque": tam_destaque,
         "tam_manchete": tam_manchete,
     }
+    if imagem:
+        contexto["imagem"] = {"uri": Path(imagem["arquivo"]).resolve().as_uri(), "credito": imagem.get("credito", "")}
+        return renderizar("noticia_foto.html", contexto, estilo, destino)
     return renderizar("noticia.html", contexto, estilo, destino)

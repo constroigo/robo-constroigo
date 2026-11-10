@@ -39,10 +39,17 @@ Regras obrigatórias:
   MÁQUINAS E EQUIPAMENTOS, TECNOLOGIA, MERCADO DE TRABALHO, ECONOMIA, SANEAMENTO.
 - "local": cidade/estado da notícia em maiúsculas (ex.: "GOIÂNIA", "GOIÁS", "BRASIL").
 - "hashtags": até 5 hashtags específicas do assunto, sem acento.
+- "busca_foto": 2 a 4 palavras EM INGLÊS para buscar uma foto genérica do tema num banco
+  de imagens (ex.: "construction crane city", "power transmission lines", "asphalt road paving").
+  Nada de nomes próprios.
+- "descricao_imagem": 1 frase em português descrevendo uma cena genérica para ilustrar o tema
+  (ex.: "canteiro de obras de um prédio residencial com guindaste ao entardecer"). Sem nomes
+  de empresas, pessoas ou lugares específicos.
 
 Responda só com JSON no formato:
 {{"escolhida": <número da notícia>, "categoria": "", "local": "", "destaque": "",
-"manchete": "", "resumo": "", "legenda": "", "hashtags": []}}
+"manchete": "", "resumo": "", "legenda": "", "hashtags": [], "busca_foto": "",
+"descricao_imagem": ""}}
 
 Notícias:
 {lista}

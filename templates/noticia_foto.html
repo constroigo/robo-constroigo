@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .post { width: 1080px; height: 1350px; background: {{ e.bg }}; color: {{ e.texto }}; font-family: Sora, sans-serif;
+          display: flex; flex-direction: column; overflow: hidden; }
+  .foto { position: relative; height: 610px; flex-shrink: 0; background: #0F2747; }
+  .foto img.bg { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto .sombra { position: absolute; inset: 0;
+                  background: linear-gradient(180deg, rgba(15,39,71,0.55) 0%, rgba(15,39,71,0) 30%, rgba(15,39,71,0) 70%, rgba(15,39,71,0.45) 100%); }
+  .foto .topo { position: absolute; top: 56px; left: 80px; right: 80px; display: flex; align-items: center;
+                justify-content: space-between; gap: 24px; }
+  .tag { font-size: 26px; font-weight: 700; letter-spacing: 0.06em; background: {{ e.tag_bg }}; color: {{ e.tag_fg }};
+         padding: 12px 22px; border-radius: 10px; white-space: nowrap; }
+  .local { font-size: 22px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.04em; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+  .credito-foto { position: absolute; right: 24px; bottom: 18px; font-size: 16px; color: #FFFFFF;
+                  background: rgba(0,0,0,0.45); padding: 6px 12px; border-radius: 6px; }
+  .conteudo { flex: 1; padding: 44px 80px 64px; display: flex; flex-direction: column; justify-content: space-between; }
+  .meio { display: flex; flex-direction: column; gap: 18px; }
+  .destaque { font-weight: 800; letter-spacing: -0.05em; line-height: 0.95; color: {{ e.destaque }}; }
+  h1 { margin: 0; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+  .resumo { margin: 0; font-size: 28px; line-height: 1.4; color: {{ e.sub }}; }
+  .base { display: flex; flex-direction: column; gap: 22px; }
+  .oferecimento { display: flex; align-items: center; justify-content: space-between; background: #FFFFFF;
+                  color: #0F2747; border-radius: 14px; padding: 12px 26px;
+                  {% if e.nome_tema == 'claro' %}border: 2px solid #D5DBE5;{% endif %} }
+  .oferecimento span.rot { font-size: 17px; font-weight: 700; letter-spacing: 0.12em; color: #4A5568; }
+  .oferecimento .marca { font-size: 24px; font-weight: 800; }
+  .oferecimento img { height: 54px; max-width: 340px; object-fit: contain; border-radius: 6px; }
+  .rodape { display: flex; align-items: center; justify-content: space-between;
+            border-top: 2px solid {{ e.linha }}; padding-top: 22px; }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo .nome { font-size: 36px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+  .logo .go { font-size: 27px; font-weight: 800; line-height: 1; background: {{ e.go_bg }}; color: {{ e.go_fg }};
+              padding: 5px 9px; border-radius: 7px; }
+  .credito { display: flex; align-items: center; gap: 16px; }
+  .credito .autor { font-size: 22px; font-weight: 700; text-align: right; }
+  .credito .fonte { font-size: 18px; color: {{ e.sub }}; text-align: right; }
+</style>
+</head>
+<body>
+<div class="post">
+  <div class="foto">
+    <img class="bg" src="{{ imagem.uri }}" alt="">
+    <div class="sombra"></div>
+    <div class="topo">
+      <span class="tag">{{ tag }}</span>
+      {% if local %}<span class="local">{{ local }}</span>{% endif %}
+    </div>
+    {% if imagem.credito %}<span class="credito-foto">{{ imagem.credito }}</span>{% endif %}
+  </div>
+
+  <div class="conteudo">
+    <div class="meio">
+      {% if destaque %}<span class="destaque" style="font-size: {{ (tam_destaque * 0.55)|int }}px">{{ destaque }}</span>{% endif %}
+      <h1 style="font-size: {{ (tam_manchete * 0.8)|int }}px">{{ manchete }}</h1>
+      <p class="resumo">{{ resumo }}</p>
+    </div>
+
+    <div class="base">
+      {% if patrocinador %}
+      <div class="oferecimento">
+        <span class="rot">OFERECIMENTO</span>
+        {% if patrocinador.logo_uri %}<img src="{{ patrocinador.logo_uri }}" alt="{{ patrocinador.nome }}">
+        {% else %}<span class="marca">{{ patrocinador.nome }}</span>{% endif %}
+      </div>
+      {% endif %}
+      <div class="rodape">
+        <div class="logo">
+          <svg viewBox="0 0 200 200" width="56" height="56"><rect x="30" y="134" width="44" height="44" rx="8" fill="{{ e.bloco_a }}"/><rect x="82" y="134" width="44" height="44" rx="8" fill="{{ e.bloco_a }}"/><rect x="134" y="134" width="44" height="44" rx="8" fill="{{ e.bloco_a }}"/><rect x="82" y="82" width="44" height="44" rx="8" fill="{{ e.bloco_b }}"/><rect x="134" y="82" width="44" height="44" rx="8" fill="{{ e.bloco_b }}"/><rect x="134" y="30" width="44" height="44" rx="8" fill="{{ e.bloco_c }}"/></svg>
+          <span class="nome">constrói</span><span class="go">GO</span>
+        </div>
+        <div class="credito">
+          <div>
+            <div class="autor">Por {{ autor }}</div>
+            {% if fonte %}<div class="fonte">{{ fonte }}</div>{% endif %}
+          </div>
+          {% if foto_uri %}<img src="{{ foto_uri }}" alt="" style="width: 68px; height: 68px; border-radius: 50%; border: 3px solid {{ e.destaque if e.nome_tema != 'amarelo' else '#FFFFFF' }}; object-fit: cover">{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
