@@ -25,7 +25,7 @@ def abrir(pasta: str) -> None:
         print("Publicado automaticamente:", link)
         return
 
-    horario = {"manha": "Manhã", "meiodia": "Meio-dia", "tarde": "Fim da tarde"}.get(post["horario"], "")
+    horario = {"manha": "Manhã", "meiodia": "Meio-dia", "tarde": "Fim da tarde", "especial": "Especial"}.get(post["horario"], "")
     alertas = "".join(f"> ⚠️ {a}\n" for a in post.get("alertas", []))
     if alertas:
         alertas = "**Confira antes de aprovar:**\n" + alertas + "\n"
