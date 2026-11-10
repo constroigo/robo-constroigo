@@ -31,7 +31,8 @@ Regras obrigatórias:
 - "manchete": até 90 caracteres, direta, sem ponto final. Se houver destaque, a manchete
   continua a frase depois do número (ex.: destaque "R$ 4,1 bi" + manchete "em imóveis
   vendidos em Goiânia no 1º semestre"). A manchete NUNCA repete o número do destaque.
-- "resumo": 1 frase de até 150 caracteres para a arte.
+- "resumo": 1 frase de até 150 caracteres para a arte, que ACRESCENTA informação ou contexto
+  à manchete (nunca repete a manchete).
 - "legenda": 3 a 5 frases curtas para o Instagram, em tom profissional e próximo,
   explicando o fato e por que importa para quem constrói em Goiás. Termine com uma
   pergunta para gerar comentários. Não use emojis em excesso (no máximo 2).
@@ -88,6 +89,10 @@ def _chamar(prompt: str, chave: str) -> str | None:
         if resp.ok:
             return resp.json()["candidates"][0]["content"]["parts"][0]["text"]
     return None
+
+
+def _normal(t: str) -> str:
+    return re.sub(r"[^a-z0-9 ]", "", (t or "").lower())
 
 
 def _numeros(texto: str) -> set[str]:
@@ -166,6 +171,8 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
     post["noticia"] = noticia
     post["manchete"] = post["manchete"].strip().rstrip(".")[:110]
     post["resumo"] = post["resumo"].strip()[:180]
+    if _normal(post["resumo"]).startswith(_normal(post["manchete"])[:40]):
+        post["resumo"] = ""  # resumo igual à manchete: melhor sem
 
     tags = [t if t.startswith("#") else "#" + t for t in post.get("hashtags", [])]
     vistas, todas = set(), []

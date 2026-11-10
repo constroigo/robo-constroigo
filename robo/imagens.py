@@ -63,7 +63,9 @@ Só reprove se houver algum destes problemas claros:
 - trabalhador sem capacete/EPI ou em situação insegura em primeiro plano;
 - placas ou textos em idioma asiático/árabe em destaque;
 - assunto sem nenhuma relação com construção, infraestrutura, cidade ou economia;
-- turistas, crianças ou pessoas posando em primeiro plano.
+- turistas, crianças ou pessoas posando em primeiro plano;
+- objeto antigo/histórico quando a notícia é sobre algo moderno (trem a vapor, máquina antiga, carro antigo);
+- nome de cidade, empresa ou país estrangeiro legível na foto.
 Responda na primeira palavra OK ou PROBLEMA, e depois o motivo em poucas palavras."""
 
 
