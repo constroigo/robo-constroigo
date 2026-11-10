@@ -53,20 +53,24 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
     )
     prompt = INSTRUCOES.format(autor=AUTOR, tema=tema, lista=lista)
     texto, erros = None, []
-    tentativas = [(m, t) for t in range(3) for m in MODELOS]
+    tentativas = [(m, t) for t in range(2) for m in MODELOS]
     for modelo, rodada in tentativas:
         if rodada:
             time.sleep(20)
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent"
-        resp = requests.post(
-            url,
-            headers={"x-goog-api-key": chave},
-            json={
-                "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {"responseMimeType": "application/json", "temperature": 0.4},
-            },
-            timeout=90,
-        )
+        try:
+            resp = requests.post(
+                url,
+                headers={"x-goog-api-key": chave},
+                json={
+                    "contents": [{"parts": [{"text": prompt}]}],
+                    "generationConfig": {"responseMimeType": "application/json", "temperature": 0.4},
+                },
+                timeout=(15, 75),
+            )
+        except requests.RequestException as erro:
+            erros.append(f"{modelo}: sem resposta ({type(erro).__name__})")
+            continue
         if resp.ok:
             texto = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
             print("Modelo usado:", modelo)
