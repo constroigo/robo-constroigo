@@ -1,0 +1,22 @@
+name: Testar conexão com o Instagram
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consultar a conta (não publica nada)
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          T="$(echo -n "$IG_ACCESS_TOKEN" | tr -d '[:space:]')"
+          case "$T" in EAA*) API=https://graph.facebook.com ;; *) API=https://graph.instagram.com ;; esac
+          echo "Tipo de chave: ${T:0:3}… | API: $API"
+          curl -sS "$API/$IG_USER_ID?fields=username,followers_count,media_count&access_token=$T" | sed "s/$T/***/g"
+          echo
