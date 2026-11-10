@@ -53,7 +53,8 @@ def main() -> None:
     post = redacao.escrever_post(lista, conf["rotulo"])
     patrocinador = escolher_patrocinador(agora, horario, post.get("categoria", ""))
 
-    pasta = Path("posts") / f"{agora:%Y-%m-%d}-{horario}"
+    # Pasta única por execução, para dois posts do mesmo horário não se sobrescreverem.
+    pasta = Path("posts") / f"{agora:%Y-%m-%d}-{horario}-{agora:%H%M%S}"
     gerar_arte(post, patrocinador, pasta / "post.jpg", agora)
     post["patrocinador"] = patrocinador["nome"] if patrocinador else ""
     post["horario"] = horario
