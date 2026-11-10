@@ -26,8 +26,12 @@ def abrir(pasta: str) -> None:
         return
 
     horario = {"manha": "Manhã", "meiodia": "Meio-dia", "tarde": "Fim da tarde"}.get(post["horario"], "")
+    alertas = "".join(f"> ⚠️ {a}\n" for a in post.get("alertas", []))
+    if alertas:
+        alertas = "**Confira antes de aprovar:**\n" + alertas + "\n"
     corpo = (
-        f"![arte]({url})\n\n"
+        alertas
+        + f"![arte]({url})\n\n"
         f"**Legenda:**\n\n```\n{post['legenda_final']}\n```\n\n"
         f"**Notícia original:** [{post['noticia']['titulo']}]({post['noticia']['link']}) — "
         f"{post['noticia']['fonte']}\n\n"

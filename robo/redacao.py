@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 import time
 
 import requests
@@ -20,13 +21,16 @@ Tarefa: das notícias abaixo, escolha UMA — a mais relevante para esse públic
 
 Regras obrigatórias:
 - Use SOMENTE as informações do título e do trecho da notícia escolhida. Não invente
-  números, datas, nomes ou declarações. Se não tiver certeza, deixe de fora.
+  números, datas, nomes ou declarações. É PROIBIDO citar órgãos, empresas, leilões,
+  programas, cidades ou causas que não estejam escritos no título/trecho. Se a notícia
+  tiver pouca informação, a legenda fica curta e comenta o impacto para o setor de forma
+  geral, sem acrescentar fatos novos.
 - Escreva com suas palavras (não copie frases da notícia).
 - "destaque": um número curto que aparece no título/trecho (ex.: "R$ 948 mi", "11 mil",
   "+0,35%"). Se não houver número claro, deixe "".
 - "manchete": até 90 caracteres, direta, sem ponto final. Se houver destaque, a manchete
   continua a frase depois do número (ex.: destaque "R$ 4,1 bi" + manchete "em imóveis
-  vendidos em Goiânia no 1º semestre").
+  vendidos em Goiânia no 1º semestre"). A manchete NUNCA repete o número do destaque.
 - "resumo": 1 frase de até 150 caracteres para a arte.
 - "legenda": 3 a 5 frases curtas para o Instagram, em tom profissional e próximo,
   explicando o fato e por que importa para quem constrói em Goiás. Termine com uma
@@ -43,6 +47,74 @@ Responda só com JSON no formato:
 Notícias:
 {lista}
 """
+
+
+REVISAO = """Você é revisor de fatos. Fonte (única verdade):
+TÍTULO: {titulo}
+TRECHO: {trecho}
+
+Post escrito a partir dela:
+{post}
+
+Corrija o post: remova ou reescreva QUALQUER afirmação, número, nome, órgão, empresa,
+leilão, programa, local ou causa que NÃO esteja escrito na fonte. Comentários gerais de
+impacto para o setor (sem fatos novos) podem ficar. Se "destaque" não aparecer na fonte,
+deixe "". A "manchete" não pode repetir o número do "destaque". Mantenha o mesmo formato
+JSON e as mesmas chaves, e responda só com o JSON corrigido."""
+
+
+def _chamar(prompt: str, chave: str) -> str | None:
+    for modelo in MODELOS:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent"
+        try:
+            resp = requests.post(
+                url,
+                headers={"x-goog-api-key": chave},
+                json={
+                    "contents": [{"parts": [{"text": prompt}]}],
+                    "generationConfig": {"responseMimeType": "application/json", "temperature": 0.1},
+                },
+                timeout=(15, 75),
+            )
+        except requests.RequestException:
+            continue
+        if resp.ok:
+            return resp.json()["candidates"][0]["content"]["parts"][0]["text"]
+    return None
+
+
+def _numeros(texto: str) -> set[str]:
+    return set(re.findall(r"\d+(?:[.,]\d+)*", texto or ""))
+
+
+def _revisar(post: dict, noticia: dict, chave: str) -> dict:
+    campos = {k: post.get(k) for k in ("categoria", "local", "destaque", "manchete", "resumo", "legenda", "hashtags")}
+    texto = _chamar(
+        REVISAO.format(
+            titulo=noticia["titulo"], trecho=noticia["trecho"],
+            post=json.dumps(campos, ensure_ascii=False),
+        ),
+        chave,
+    )
+    if texto:
+        try:
+            corrigido = json.loads(texto)
+            for k in campos:
+                if corrigido.get(k) is not None:
+                    post[k] = corrigido[k]
+            print("Revisão de fatos aplicada.")
+        except (ValueError, AttributeError):
+            print("Revisão de fatos ignorada (resposta inválida).")
+
+    # Checagem automática: todo número do post precisa existir na fonte.
+    fonte = _numeros(noticia["titulo"] + " " + noticia["trecho"])
+    if post.get("destaque") and not _numeros(post["destaque"]) <= fonte:
+        post["destaque"] = ""
+    suspeitos = sorted(
+        n for k in ("manchete", "resumo", "legenda") for n in _numeros(post.get(k, "")) if n not in fonte
+    )
+    post["alertas"] = [f"Número não encontrado na notícia: {n}" for n in suspeitos]
+    return post
 
 
 def escrever_post(noticias: list[dict], tema: str) -> dict:
@@ -81,6 +153,7 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
     post = json.loads(texto)
 
     noticia = noticias[int(post["escolhida"])]
+    post = _revisar(post, noticia, chave)
     post["noticia"] = noticia
     post["manchete"] = post["manchete"].strip().rstrip(".")[:110]
     post["resumo"] = post["resumo"].strip()[:180]
