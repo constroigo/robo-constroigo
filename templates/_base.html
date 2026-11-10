@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .post { width: 1080px; height: 1350px; padding: 80px; background: {{ e.bg }}; color: {{ e.texto }};
+          font-family: Sora, sans-serif; display: flex; flex-direction: column; justify-content: space-between;
+          position: relative; overflow: hidden; }
+  .topo { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .tag { font-size: 26px; font-weight: 700; letter-spacing: 0.06em; background: {{ e.tag_bg }}; color: {{ e.tag_fg }};
+         padding: 12px 22px; border-radius: 10px; white-space: nowrap; }
+  .local { font-size: 24px; font-weight: 600; color: {{ e.sub }}; letter-spacing: 0.04em; text-align: right; }
+  .meio { display: flex; flex-direction: column; gap: 32px; }
+  .meio.barra { border-left: 14px solid {{ e.destaque }}; padding-left: 44px; }
+  .chamada { margin: 0; font-size: 40px; font-weight: 600; color: {{ e.sub }}; }
+  .destaque { font-weight: 800; letter-spacing: -0.06em; line-height: 0.9; color: {{ e.destaque }}; }
+  .caixa { align-self: flex-start; background: {{ e.caixa_bg }}; color: {{ e.caixa_fg }}; border-radius: 28px;
+           padding: 28px 40px 34px; font-weight: 800; letter-spacing: -0.05em; line-height: 0.95; }
+  h1 { margin: 0; font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; }
+  .resumo { margin: 0; font-size: 32px; line-height: 1.45; color: {{ e.sub }}; max-width: 880px; }
+  .itens { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; }
+  .itens li { display: flex; align-items: center; gap: 20px; font-size: 32px; font-weight: 600; }
+  .itens li span.q { width: 22px; height: 22px; background: {{ e.destaque }}; border-radius: 5px; flex-shrink: 0; }
+  .marca-grande { display: flex; align-items: center; gap: 24px; }
+  .marca-grande .nome { font-size: 104px; font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
+  .marca-grande .go { font-size: 78px; font-weight: 800; line-height: 1; background: {{ e.go_bg }}; color: {{ e.go_fg }};
+                      padding: 10px 18px; border-radius: 16px; }
+  .base { display: flex; flex-direction: column; gap: 26px; }
+  .oferecimento { display: flex; align-items: center; justify-content: space-between; background: #FFFFFF;
+                  color: #0F2747; border-radius: 16px; padding: 16px 28px;
+                  {% if e.nome_tema == 'claro' %}border: 2px solid #D5DBE5;{% endif %} }
+  .oferecimento span.rot { font-size: 18px; font-weight: 700; letter-spacing: 0.12em; color: #4A5568; }
+  .oferecimento .marca { font-size: 26px; font-weight: 800; }
+  .oferecimento img { height: 64px; max-width: 380px; object-fit: contain; border-radius: 8px; }
+  .rodape { display: flex; align-items: center; justify-content: space-between;
+            border-top: 2px solid {{ e.linha }}; padding-top: 30px; }
+  .logo { display: flex; align-items: center; gap: 16px; }
+  .logo .nome { font-size: 40px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+  .logo .go { font-size: 30px; font-weight: 800; line-height: 1; background: {{ e.go_bg }}; color: {{ e.go_fg }};
+              padding: 6px 10px; border-radius: 8px; }
+  .credito { display: flex; align-items: center; gap: 18px; }
+  .credito .autor { font-size: 24px; font-weight: 700; text-align: right; }
+  .credito .fonte { font-size: 20px; color: {{ e.sub }}; text-align: right; }
+  .deco { position: absolute; right: -70px; bottom: 300px; opacity: 0.08; }
+</style>
+</head>
+<body>
+{% macro blocos(tam) -%}
+<svg viewBox="0 0 200 200" width="{{ tam }}" height="{{ tam }}"><rect x="30" y="134" width="44" height="44" rx="8" fill="{{ e.bloco_a }}"/><rect x="82" y="134" width="44" height="44" rx="8" fill="{{ e.bloco_a }}"/><rect x="134" y="134" width="44" height="44" rx="8" fill="{{ e.bloco_a }}"/><rect x="82" y="82" width="44" height="44" rx="8" fill="{{ e.bloco_b }}"/><rect x="134" y="82" width="44" height="44" rx="8" fill="{{ e.bloco_b }}"/><rect x="134" y="30" width="44" height="44" rx="8" fill="{{ e.bloco_c }}"/></svg>
+{%- endmacro %}
+<div class="post">
+  {% if e.layout == 'classico' %}<div class="deco">{{ blocos(380) }}</div>{% endif %}
+  <div class="topo">
+    <span class="tag">{{ tag }}</span>
+    {% if local %}<span class="local">{{ local }}</span>{% endif %}
+  </div>
+
+  <div class="meio {{ 'barra' if e.layout == 'barra' else '' }}">
+    {% block meio %}{% endblock %}
+  </div>
+
+  <div class="base">
+    {% if patrocinador %}
+    <div class="oferecimento">
+      <span class="rot">OFERECIMENTO</span>
+      {% if patrocinador.logo_uri %}<img src="{{ patrocinador.logo_uri }}" alt="{{ patrocinador.nome }}">
+      {% else %}<span class="marca">{{ patrocinador.nome }}</span>{% endif %}
+    </div>
+    {% endif %}
+    <div class="rodape">
+      <div class="logo">{{ blocos(64) }}<span class="nome">constrói</span><span class="go">GO</span></div>
+      <div class="credito">
+        <div>
+          <div class="autor">Por {{ autor }}</div>
+          {% if fonte %}<div class="fonte">{{ fonte }}</div>{% endif %}
+        </div>
+        {% if foto_uri %}<img src="{{ foto_uri }}" alt="" style="width: 76px; height: 76px; border-radius: 50%; border: 3px solid {{ e.destaque if e.nome_tema != 'amarelo' else '#FFFFFF' }}; object-fit: cover">{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

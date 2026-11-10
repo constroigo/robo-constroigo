@@ -1,73 +1,17 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  * { box-sizing: border-box; }
-  body { margin: 0; }
-  .post { width: 1080px; height: 1350px; padding: 80px; background: #0F2747; color: #FFFFFF;
-          font-family: Sora, sans-serif; display: flex; flex-direction: column; justify-content: space-between; }
-  .tag { align-self: flex-start; font-size: 26px; font-weight: 700; letter-spacing: 0.06em; background: #F2B705;
-         color: #0F2747; padding: 12px 22px; border-radius: 10px; }
-  .meio { display: flex; flex-direction: column; gap: 34px; }
-  .chamada { font-size: 44px; font-weight: 600; color: #C9D3E3; margin: 0; }
-  h1 { margin: 0; font-size: 92px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.02; }
-  .marca { display: flex; align-items: center; gap: 28px; }
-  .marca .nome { font-size: 104px; font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
-  .marca .go { font-size: 78px; font-weight: 800; line-height: 1; background: #F2B705; color: #0F2747;
-               padding: 10px 20px; border-radius: 18px; }
-  .texto { margin: 0; font-size: 34px; line-height: 1.45; color: #C9D3E3; max-width: 900px; }
-  .itens { display: flex; flex-direction: column; gap: 18px; margin: 0; padding: 0; list-style: none; }
-  .itens li { display: flex; align-items: center; gap: 20px; font-size: 34px; font-weight: 600; }
-  .itens li span.q { width: 22px; height: 22px; background: #F2B705; border-radius: 5px; flex-shrink: 0; }
-  .rodape { display: flex; align-items: center; justify-content: space-between;
-            border-top: 2px solid #2B4C7E; padding-top: 32px; }
-  .logo { display: flex; align-items: center; gap: 16px; }
-  .logo .nome { font-size: 40px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
-  .logo .go { font-size: 30px; font-weight: 800; line-height: 1; background: #F2B705; color: #0F2747;
-              padding: 6px 10px; border-radius: 8px; }
-  .credito { display: flex; align-items: center; gap: 18px; }
-  .credito .autor { font-size: 24px; font-weight: 700; text-align: right; }
-  .credito .sub { font-size: 20px; color: #C9D3E3; text-align: right; }
-</style>
-</head>
-<body>
-<div class="post">
-  <span class="tag">{{ tag }}</span>
-
-  <div class="meio">
-    {% if chamada %}<p class="chamada">{{ chamada }}</p>{% endif %}
-    {% if mostrar_marca %}
-    <div class="marca">
-      <svg viewBox="0 0 200 200" width="130" height="130"><rect x="30" y="134" width="44" height="44" rx="8" fill="#FFFFFF"/><rect x="82" y="134" width="44" height="44" rx="8" fill="#FFFFFF"/><rect x="134" y="134" width="44" height="44" rx="8" fill="#FFFFFF"/><rect x="82" y="82" width="44" height="44" rx="8" fill="#9DB7E0"/><rect x="134" y="82" width="44" height="44" rx="8" fill="#9DB7E0"/><rect x="134" y="30" width="44" height="44" rx="8" fill="#F2B705"/></svg>
-      <span class="nome">constrói</span><span class="go">GO</span>
-    </div>
-    {% else %}
-    <h1>{{ titulo }}</h1>
-    {% endif %}
-    {% if texto %}<p class="texto">{{ texto }}</p>{% endif %}
-    {% if itens %}
-    <ul class="itens">
-      {% for item in itens %}<li><span class="q"></span>{{ item }}</li>{% endfor %}
-    </ul>
-    {% endif %}
-  </div>
-
-  <div class="rodape">
-    <div class="logo">
-      <svg viewBox="0 0 200 200" width="64" height="64"><rect x="30" y="134" width="44" height="44" rx="8" fill="#FFFFFF"/><rect x="82" y="134" width="44" height="44" rx="8" fill="#FFFFFF"/><rect x="134" y="134" width="44" height="44" rx="8" fill="#FFFFFF"/><rect x="82" y="82" width="44" height="44" rx="8" fill="#9DB7E0"/><rect x="134" y="82" width="44" height="44" rx="8" fill="#9DB7E0"/><rect x="134" y="30" width="44" height="44" rx="8" fill="#F2B705"/></svg>
-      <span class="nome">constrói</span><span class="go">GO</span>
-    </div>
-    <div class="credito">
-      <div>
-        <div class="autor">Por {{ autor }}</div>
-        {% if sub %}<div class="sub">{{ sub }}</div>{% endif %}
-      </div>
-      {% if foto_uri %}<img src="{{ foto_uri }}" alt="" style="width: 76px; height: 76px; border-radius: 50%; border: 3px solid #F2B705; object-fit: cover">{% endif %}
-    </div>
-  </div>
-</div>
-</body>
-</html>
+{% extends "_base.html" %}
+{% block meio %}
+  {% if chamada %}<p class="chamada">{{ chamada }}</p>{% endif %}
+  {% if mostrar_marca %}
+    <div class="marca-grande">{{ blocos(130) }}<span class="nome">constrói</span><span class="go">GO</span></div>
+  {% elif e.layout == 'caixa' %}
+    <span class="caixa" style="font-size: 76px">{{ titulo }}</span>
+  {% else %}
+    <h1 style="font-size: 84px">{{ titulo }}</h1>
+  {% endif %}
+  {% if texto %}<p class="resumo">{{ texto }}</p>{% endif %}
+  {% if itens %}
+  <ul class="itens">
+    {% for item in itens %}<li><span class="q"></span>{{ item }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+{% endblock %}

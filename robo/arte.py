@@ -10,6 +10,7 @@ from markupsafe import Markup, escape
 from playwright.sync_api import sync_playwright
 
 from .config import AUTOR, FOTO_AUTOR
+from .estilos import escolher
 
 FOTO = Path(FOTO_AUTOR)
 
@@ -34,29 +35,30 @@ def _tamanhos(destaque: str, manchete: str) -> tuple[int, int]:
     return tam_destaque, tam_manchete
 
 
-def gerar_arte(post: dict, patrocinador: dict | None, destino: Path, quando: datetime) -> Path:
-    tam_destaque, tam_manchete = _tamanhos(post.get("destaque", ""), post["manchete"])
+def proximo_estilo(layout: str | None = None, tema: str | None = None) -> dict:
+    """Escolhe o estilo pela quantidade de posts já feitos: cada post sai diferente do anterior."""
+    pasta = Path("posts")
+    n = len([d for d in pasta.iterdir() if d.is_dir()]) if pasta.exists() else 0
+    return escolher(n, layout, tema)
+
+
+def _logo(patrocinador: dict | None) -> dict | None:
     if patrocinador and patrocinador.get("logo"):
         logo = Path(patrocinador["logo"]).resolve()
-        patrocinador = {**patrocinador, "logo_uri": logo.as_uri() if logo.exists() else ""}
-    html = _env.get_template("noticia.html").render(
-        categoria=post["categoria"],
-        local=post.get("local") or "GOIÁS",
-        data=f"{quando.day:02d} {MESES[quando.month - 1]} {quando.year}",
-        destaque=post.get("destaque", ""),
-        manchete=_sem_quebra_no_hifen(post["manchete"]),
-        resumo=post["resumo"],
-        fonte=post["noticia"]["fonte"] or "imprensa",
+        return {**patrocinador, "logo_uri": logo.as_uri() if logo.exists() else ""}
+    return patrocinador
+
+
+def renderizar(template: str, contexto: dict, estilo: dict, destino: Path) -> Path:
+    html = _env.get_template(template).render(
+        e=estilo,
         autor=AUTOR,
         foto_uri=FOTO.resolve().as_uri() if FOTO.exists() else "",
-        patrocinador=patrocinador,
-        tam_destaque=tam_destaque,
-        tam_manchete=tam_manchete,
+        **contexto,
     )
     destino.parent.mkdir(parents=True, exist_ok=True)
     html_path = destino.with_suffix(".html")
     html_path.write_text(html, encoding="utf-8")
-
     with sync_playwright() as p:
         navegador = p.chromium.launch(executable_path=os.environ.get("CHROME_PATH") or None)
         pagina = navegador.new_page(viewport={"width": 1080, "height": 1350})
@@ -66,3 +68,21 @@ def gerar_arte(post: dict, patrocinador: dict | None, destino: Path, quando: dat
         navegador.close()
     html_path.unlink()
     return destino
+
+
+def gerar_arte(post: dict, patrocinador: dict | None, destino: Path, quando: datetime,
+               estilo: dict | None = None) -> Path:
+    estilo = estilo or proximo_estilo()
+    tam_destaque, tam_manchete = _tamanhos(post.get("destaque", ""), post["manchete"])
+    contexto = {
+        "tag": post["categoria"],
+        "local": f"{post.get('local') or 'GOIÁS'} · {quando.day:02d} {MESES[quando.month - 1]} {quando.year}",
+        "destaque": post.get("destaque", ""),
+        "manchete": _sem_quebra_no_hifen(post["manchete"]),
+        "resumo": post["resumo"],
+        "fonte": "Fonte: " + (post["noticia"]["fonte"] or "imprensa"),
+        "patrocinador": _logo(patrocinador),
+        "tam_destaque": tam_destaque,
+        "tam_manchete": tam_manchete,
+    }
+    return renderizar("noticia.html", contexto, estilo, destino)

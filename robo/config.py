@@ -45,6 +45,7 @@ PATROCINADORES = [
     {"nome": "Siqueira Locação", "logo": "assets/patrocinadores/siqueira-locacao.png"},
     {"nome": "Histórias Helvécia", "logo": "assets/patrocinadores/historias-helvecia.png"},
     {"nome": "H2R Incorp", "logo": "assets/patrocinadores/h2r-incorp.png"},
+    {"nome": "H2R Energia", "logo": "assets/patrocinadores/h2r-energia.png"},
 ]
 
 # Anunciante preferido por assunto do post (o resto entra em rodízio).
@@ -55,6 +56,10 @@ PATROCINADOR_POR_CATEGORIA = {
     "MERCADO IMOBILIÁRIO": "Histórias Helvécia",
     "OBRAS": "H2R Engenharia",
     "MERCADO DE TRABALHO": "H2R Engenharia",
+    "ENERGIA": "H2R Energia",
+    "TECNOLOGIA": "H2R Energia",
+    "ECONOMIA": "H2R Incorp",
+    "NOVIDADE": "H2R Engenharia",
 }
 
 HASHTAGS_FIXAS = ["#constroigo", "#construcaocivil", "#goias", "#goiania", "#engenharia"]
