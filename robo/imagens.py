@@ -50,31 +50,74 @@ def pexels(busca: str, destino: Path) -> dict | None:
         return None
 
 
-def pixabay(busca: str, destino: Path) -> dict | None:
+CATEGORIA_PIXABAY = {
+    "MERCADO IMOBILIÁRIO": "buildings", "OBRAS": "industry", "INFRAESTRUTURA": "industry",
+    "ENERGIA": "industry", "SANEAMENTO": "industry", "MÁQUINAS E EQUIPAMENTOS": "industry",
+    "TECNOLOGIA": "industry", "ECONOMIA": "business", "MERCADO DE TRABALHO": "industry",
+}
+
+VERIFICACAO = """Você avalia fotos para um perfil profissional de engenharia civil no Brasil.
+A foto vai ilustrar esta notícia: "{tema}".
+Responda APROVADA somente se TODAS forem verdade:
+1) combina com o tema (construção, obra, infraestrutura, energia, imóveis ou economia, conforme a notícia);
+2) se houver trabalhadores, estão com capacete/EPI e em situação segura (nada de chinelo, sem capacete, risco);
+3) não tem texto legível em outro idioma, marcas em destaque nem cenário claramente de outro país (placas asiáticas etc.);
+4) é uma foto de boa qualidade, sem turistas ou pessoas em primeiro plano sem relação com o tema.
+Responda só APROVADA ou REPROVADA."""
+
+
+def _aprovada(arquivo: bytes, tema: str) -> bool:
+    chave = os.environ.get("GEMINI_API_KEY", "").strip()
+    if not chave:
+        return True
+    from .redacao import MODELOS
+    for modelo in MODELOS:
+        try:
+            r = requests.post(
+                f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent",
+                headers={"x-goog-api-key": chave},
+                json={"contents": [{"parts": [
+                    {"inline_data": {"mime_type": "image/jpeg", "data": base64.b64encode(arquivo).decode()}},
+                    {"text": VERIFICACAO.format(tema=tema)},
+                ]}], "generationConfig": {"temperature": 0}},
+                timeout=(15, 60),
+            )
+        except requests.RequestException:
+            continue
+        if r.ok:
+            texto = r.json()["candidates"][0]["content"]["parts"][0].get("text", "").upper()
+            return "APROVADA" in texto and "REPROVADA" not in texto
+    return False  # sem como verificar: melhor publicar sem foto
+
+
+def pixabay(busca: str, destino: Path, tema: str = "", categoria: str = "") -> dict | None:
     chave = os.environ.get("PIXABAY_API_KEY", "").strip()
     if not chave or not busca:
         return None
+    params = {"key": chave, "q": busca, "image_type": "photo", "orientation": "horizontal",
+              "safesearch": "true", "per_page": 30, "min_width": 1600, "order": "popular"}
+    if CATEGORIA_PIXABAY.get(categoria.upper()):
+        params["category"] = CATEGORIA_PIXABAY[categoria.upper()]
     try:
-        r = requests.get(
-            "https://pixabay.com/api/",
-            params={"key": chave, "q": busca, "image_type": "photo", "orientation": "horizontal",
-                    "safesearch": "true", "per_page": 20, "min_width": 1600},
-            timeout=30,
-        )
+        r = requests.get("https://pixabay.com/api/", params=params, timeout=30)
         r.raise_for_status()
         usadas = set(_usadas())
-        fotos = [f for f in r.json().get("hits", []) if f"pixabay:{f['id']}" not in usadas]
-        if not fotos:
-            return None
-        foto = random.choice(fotos[:8])
-        img = requests.get(foto["largeImageURL"], timeout=60)
-        img.raise_for_status()
-        destino.write_bytes(img.content)
-        _marcar(f"pixabay:{foto['id']}")
-        return {"arquivo": destino, "credito": f"Foto: {foto['user']} / Pixabay", "origem": "pixabay"}
+        fotos = [f for f in r.json().get("hits", []) if f"pixabay:{f['id']}" not in usadas][:12]
+        random.shuffle(fotos)
+        for foto in fotos[:5]:
+            img = requests.get(foto["largeImageURL"], timeout=60)
+            if not img.ok:
+                continue
+            if not _aprovada(img.content, tema or busca):
+                print("Foto reprovada na checagem:", foto["id"])
+                _marcar(f"pixabay:{foto['id']}")
+                continue
+            destino.write_bytes(img.content)
+            _marcar(f"pixabay:{foto['id']}")
+            return {"arquivo": destino, "credito": f"Foto: {foto['user']} / Pixabay", "origem": "pixabay"}
     except requests.RequestException as erro:
         print("Pixabay indisponível:", erro)
-        return None
+    return None
 
 
 def _modelos_imagem(chave: str) -> list[str]:
@@ -133,7 +176,8 @@ def gemini(descricao: str, destino: Path) -> dict | None:
 def obter(post: dict, pasta: Path) -> dict | None:
     pasta.mkdir(parents=True, exist_ok=True)
     busca = post.get("busca_foto", "")
-    foto = pexels(busca, pasta / "foto.jpg") or pixabay(busca, pasta / "foto.jpg")
+    tema = f"{post.get('manchete', '')} — {post.get('resumo', '')}"
+    foto = pexels(busca, pasta / "foto.jpg") or pixabay(busca, pasta / "foto.jpg", tema, post.get("categoria", ""))
     # Ilustração do Gemini só se a variável USAR_GEMINI_IMAGEM = sim (exige faturamento da API).
     if not foto and os.environ.get("USAR_GEMINI_IMAGEM", "").lower() == "sim":
         foto = gemini(post.get("descricao_imagem", ""), pasta / "foto.png")
