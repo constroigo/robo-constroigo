@@ -47,7 +47,7 @@
 <div class="post">
   <div class="foto">
     <img class="bg" src="{{ imagem.uri }}" alt="">
-    <div class="sombra"></div>
+    <div class="sombra" {% if imagem.clara %}style="background: linear-gradient(180deg, rgba(15,39,71,0.28) 0%, rgba(15,39,71,0) 22%);"{% endif %}></div>
     <div class="topo">
       <span class="tag">{{ tag }}</span>
       {% if local %}<span class="local">{{ local }}</span>{% endif %}

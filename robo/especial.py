@@ -32,7 +32,17 @@ def main() -> None:
     contexto = {k: dados.get(k) for k in ("tag", "chamada", "titulo", "mostrar_marca", "texto", "itens", "local")}
     contexto["fonte"] = dados.get("fonte") or dados.get("sub")
     contexto["patrocinador"] = _logo(patrocinador)
-    renderizar("especial.html", contexto, estilo, pasta / "post.jpg")
+    if dados.get("imagem"):
+        # Post com foto/imagem enviada (ex.: imagem oficial de divulgação), no layout com foto.
+        contexto.update({
+            "destaque": dados.get("destaque", ""), "manchete": dados.get("titulo", ""),
+            "resumo": dados.get("texto", ""), "tam_destaque": 200, "tam_manchete": 76,
+            "imagem": {"uri": Path(dados["imagem"]).resolve().as_uri(), "credito": dados.get("credito_imagem", ""),
+                       "clara": bool(dados.get("imagem_clara"))},
+        })
+        renderizar("noticia_foto.html", contexto, estilo, pasta / "post.jpg")
+    else:
+        renderizar("especial.html", contexto, estilo, pasta / "post.jpg")
 
     post = {
         "categoria": dados.get("tag", "ESPECIAL"),
