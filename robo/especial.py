@@ -36,6 +36,13 @@ def main() -> None:
         contexto["fonte"] = base.get("fonte") or base.get("sub")
         contexto["patrocinador"] = _logo(patrocinador)
         destino = pasta / ("post.jpg" if len(cards) == 1 else f"post-{i}.jpg")
+        if base.get("busca_foto") and not base.get("imagem"):
+            from .imagens import pixabay
+            pasta.mkdir(parents=True, exist_ok=True)
+            foto = pixabay(base["busca_foto"], pasta / f"foto-{i}.jpg", base.get("titulo", ""), base.get("categoria_foto", ""))
+            if foto:
+                base["imagem"], base["credito_imagem"] = str(foto["arquivo"]), foto["credito"]
+                print(f"card {i}: {foto['credito']}")
         if base.get("imagem"):
             contexto.update({
                 "destaque": base.get("destaque", ""), "manchete": base.get("titulo", ""),
