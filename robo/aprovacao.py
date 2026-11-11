@@ -36,6 +36,8 @@ def abrir(pasta: str) -> None:
     alertas = "".join(f"> ⚠️ {a}\n" for a in post.get("alertas", []))
     if alertas:
         alertas = "**Confira antes de aprovar:**\n" + alertas + "\n"
+    if post.get("categoria", "").upper() in ("MÁQUINAS E EQUIPAMENTOS", "TECNOLOGIA"):
+        alertas += "🎥 **Boa pauta para vídeo comentado:** se quiser gravar, me manda o vídeo que eu publico como Reel.\n\n"
     tem_video = (Path(pasta) / "video.mp4").exists()
     previa = (f"🎬 **Reel:** [assistir o vídeo]({url_publica(pasta, 'video.mp4')})\n\n" if tem_video else "")
     corpo = (

@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 
 from . import imagens, noticias, redacao
 from .arte import gerar_arte
-from .config import HORARIOS, PATROCINADOR_POR_CATEGORIA, PATROCINADORES
+from .config import FONTES_PREFERIDAS, HORARIOS, PATROCINADOR_POR_CATEGORIA, PATROCINADORES
 
 FUSO = ZoneInfo("America/Sao_Paulo")
 
@@ -51,7 +51,8 @@ def main() -> None:
         saida("pasta", "")
         return
 
-    lista = noticias.buscar(conf["buscas"])
+    extras = [f["busca"] for f in FONTES_PREFERIDAS]
+    lista = noticias.buscar(conf["buscas"] + extras, limite=40)
     print(f"{len(lista)} notícias novas encontradas.")
     if not lista:
         saida("pasta", "")

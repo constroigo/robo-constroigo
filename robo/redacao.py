@@ -18,6 +18,10 @@ investidores da construção civil em Goiás.
 
 Tarefa: das notícias abaixo, escolha UMA — a mais relevante para esse público
 (prefira Goiás/Goiânia; depois Centro-Oeste; depois Brasil). Tema deste horário: {tema}.
+Dê preferência a notícias que citem estes órgãos, entidades e veículos do setor: {preferidas}.
+A notícia PRECISA ser sobre construção civil, obras, infraestrutura, energia, mercado
+imobiliário, máquinas/equipamentos, insumos ou economia do setor. Previsão do tempo,
+crime, política partidária, esporte e vagas de emprego genéricas NÃO servem.
 
 Regras obrigatórias:
 - Use SOMENTE as informações do título e do trecho da notícia escolhida. Não invente
@@ -137,7 +141,9 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
         f"[{i}] {n['titulo']} — {n['fonte']} ({n['data']})\n    Trecho: {n['trecho']}"
         for i, n in enumerate(noticias)
     )
-    prompt = INSTRUCOES.format(autor=AUTOR, tema=tema, lista=lista)
+    from .config import FONTES_PREFERIDAS
+    preferidas = ", ".join(f["nome"] for f in FONTES_PREFERIDAS)
+    prompt = INSTRUCOES.format(autor=AUTOR, tema=tema, lista=lista, preferidas=preferidas)
     texto, erros = None, []
     tentativas = [(m, t) for t in range(2) for m in MODELOS]
     for modelo, rodada in tentativas:
@@ -171,8 +177,9 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
     post["noticia"] = noticia
     post["manchete"] = post["manchete"].strip().rstrip(".")[:110]
     post["resumo"] = post["resumo"].strip()[:180]
-    if _normal(post["resumo"]).startswith(_normal(post["manchete"])[:40]):
-        post["resumo"] = ""  # resumo igual à manchete: melhor sem
+    pm, pr = set(_normal(post["manchete"]).split()), set(_normal(post["resumo"]).split())
+    if pr and len(pm & pr) / max(len(pr), 1) > 0.6:
+        post["resumo"] = ""  # resumo praticamente igual à manchete: melhor sem
 
     tags = [t if t.startswith("#") else "#" + t for t in post.get("hashtags", [])]
     vistas, todas = set(), []

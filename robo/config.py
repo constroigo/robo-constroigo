@@ -38,6 +38,27 @@ HORARIOS = {
     },
 }
 
+# Fontes indicadas pelo Higor. O robô busca notícias delas todo dia e dá preferência a elas.
+# "busca": como procurar no Google Notícias (nome do órgão/veículo ou site:dominio).
+FONTES_PREFERIDAS = [
+    {"nome": "DNIT", "busca": "DNIT Goiás OR DNIT rodovia", "tipo": "Órgão federal"},
+    {"nome": "ANTT", "busca": "ANTT concessão rodovia OR ANTT ferrovia", "tipo": "Órgão federal"},
+    {"nome": "Goinfra", "busca": "Goinfra", "tipo": "Órgão estadual"},
+    {"nome": "Seinfra Goiânia", "busca": "Seinfra Goiânia OR \"Prefeitura de Goiânia\" obras pavimentação", "tipo": "Órgão municipal"},
+    {"nome": "Seinfra Aparecida", "busca": "\"Aparecida de Goiânia\" obras OR asfalto", "tipo": "Órgão municipal"},
+    {"nome": "CBIC", "busca": "CBIC construção", "tipo": "Entidade"},
+    {"nome": "Sinduscon-GO", "busca": "Sinduscon-GO OR \"Sinduscon Goiás\" OR \"CUB Goiás\"", "tipo": "Entidade"},
+    {"nome": "CREA-GO", "busca": "CREA-GO OR \"Crea Goiás\"", "tipo": "Conselho"},
+    {"nome": "Confea", "busca": "Confea engenharia", "tipo": "Conselho"},
+    {"nome": "CAU/GO", "busca": "\"CAU/GO\" OR \"CAU Goiás\" arquitetura", "tipo": "Conselho"},
+    {"nome": "Sobratema", "busca": "Sobratema OR site:sobratema.org.br", "tipo": "Máquinas"},
+    {"nome": "Revista M&T", "busca": "\"Revista M&T\" OR site:revistamt.com.br", "tipo": "Máquinas"},
+    {"nome": "Construmarket", "busca": "Construmarket", "tipo": "Construção"},
+    {"nome": "Grandes Construções", "busca": "\"Grandes Construções\" OR site:grandesconstrucoes.com.br", "tipo": "Construção"},
+    {"nome": "Jornal da Construção Civil", "busca": "\"Jornal da Construção Civil\"", "tipo": "Construção"},
+    {"nome": "Construction Briefing", "busca": "\"Construction Briefing\" Brasil", "tipo": "Máquinas"},
+]
+
 # Faixa "Oferecimento": um anunciante por post, em rodízio.
 # Para usar a logo, coloque o arquivo em assets/patrocinadores/ e preencha "logo".
 PATROCINADORES = [
