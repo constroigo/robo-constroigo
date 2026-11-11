@@ -44,6 +44,13 @@ def main() -> None:
     conf = HORARIOS[horario]
     agora = datetime.now(FUSO)
 
+    # O agendamento roda duas vezes por horário (o GitHub às vezes atrasa ou pula).
+    # Na segunda vez, se o post do horário já foi feito hoje, não faz de novo.
+    if os.environ.get("AGENDADO") == "sim" and list(Path("posts").glob(f"{agora:%Y-%m-%d}-{horario}-*")):
+        print("Post deste horário já foi preparado hoje.")
+        saida("pasta", "")
+        return
+
     lista = noticias.buscar(conf["buscas"])
     print(f"{len(lista)} notícias novas encontradas.")
     if not lista:

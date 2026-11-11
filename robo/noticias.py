@@ -14,6 +14,9 @@ from .config import JANELA_HORAS
 
 HISTORICO = Path("data/historico.json")
 
+# Redes sociais não são fonte jornalística: o robô ignora.
+FONTES_IGNORADAS = {"instagram", "facebook", "youtube", "tiktok", "x", "twitter", "threads", "linkedin", "kwai"}
+
 
 def _normalizar(texto: str) -> str:
     texto = unicodedata.normalize("NFKD", texto.lower())
@@ -64,6 +67,8 @@ def buscar(buscas: list[str], limite: int = 25) -> list[dict]:
             fonte = getattr(getattr(e, "source", None), "title", "") or ""
             titulo = _limpar_titulo(e.get("title", ""), fonte)
             chave = _normalizar(titulo)
+            if fonte.strip().lower() in FONTES_IGNORADAS:
+                continue
             if not titulo or chave in vistos_titulos or chave in ja_na_lista:
                 continue
             if e.get("link") in vistos_links:

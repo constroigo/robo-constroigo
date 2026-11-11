@@ -4,8 +4,11 @@ on:
   schedule:
     # Horários em UTC. Brasília = UTC-3.
     - cron: "37 10 * * *"   # 07:37 — manhã
+    - cron: "13 11 * * *"   # 08:13 — manhã (reserva, se o das 07:37 atrasar)
     - cron: "52 14 * * *"   # 11:52 — meio-dia
+    - cron: "23 15 * * *"   # 12:23 — meio-dia (reserva)
     - cron: "47 20 * * *"   # 17:47 — fim da tarde
+    - cron: "19 21 * * *"   # 18:19 — fim da tarde (reserva)
   workflow_dispatch:
     inputs:
       horario:
@@ -43,9 +46,9 @@ jobs:
         id: hora
         run: |
           case "${{ github.event.schedule }}" in
-            "37 10 * * *") H=manha ;;
-            "52 14 * * *") H=meiodia ;;
-            "47 20 * * *") H=tarde ;;
+            "37 10 * * *"|"13 11 * * *") H=manha ;;
+            "52 14 * * *"|"23 15 * * *") H=meiodia ;;
+            "47 20 * * *"|"19 21 * * *") H=tarde ;;
             *) H="${{ inputs.horario }}" ;;
           esac
           echo "horario=${H:-manha}" >> "$GITHUB_OUTPUT"
@@ -54,6 +57,7 @@ jobs:
         id: prep
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AGENDADO: ${{ github.event_name == 'schedule' && 'sim' || 'nao' }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           GEMINI_IMAGE_MODEL: ${{ vars.GEMINI_IMAGE_MODEL }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
