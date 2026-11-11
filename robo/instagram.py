@@ -104,3 +104,40 @@ def publicar_video(url_video: str, legenda: str, capa_url: str | None = None) ->
     media_id = r.json()["id"]
     link = requests.get(f"{API}/{media_id}", params={"fields": "permalink", "access_token": token}, timeout=30).json()
     return link.get("permalink", media_id)
+
+
+def publicar_carrossel(urls: list[str], legenda: str) -> str:
+    token = os.environ["IG_ACCESS_TOKEN"].strip()
+    API = _api(token)
+    usuario = (os.environ.get("IG_USER_ID") or "").strip() or "me"
+    filhos = []
+    for url in urls:
+        r = requests.post(f"{API}/{usuario}/media",
+                          data={"image_url": url, "is_carousel_item": "true", "access_token": token}, timeout=60)
+        if not r.ok:
+            raise RuntimeError(f"Erro ao criar item do carrossel: {r.status_code} {r.text}")
+        filhos.append(r.json()["id"])
+    for filho in filhos:
+        for _ in range(20):
+            s = requests.get(f"{API}/{filho}", params={"fields": "status_code", "access_token": token}, timeout=30).json()
+            if s.get("status_code") in ("FINISHED", None):
+                break
+            if s.get("status_code") == "ERROR":
+                raise RuntimeError(f"O Instagram recusou uma imagem do carrossel: {s}")
+            time.sleep(5)
+    r = requests.post(f"{API}/{usuario}/media", data={"media_type": "CAROUSEL", "children": ",".join(filhos),
+                      "caption": legenda, "access_token": token}, timeout=60)
+    if not r.ok:
+        raise RuntimeError(f"Erro ao criar o carrossel: {r.status_code} {r.text}")
+    container = r.json()["id"]
+    for _ in range(20):
+        s = requests.get(f"{API}/{container}", params={"fields": "status_code", "access_token": token}, timeout=30).json()
+        if s.get("status_code") == "FINISHED":
+            break
+        time.sleep(5)
+    r = requests.post(f"{API}/{usuario}/media_publish", data={"creation_id": container, "access_token": token}, timeout=60)
+    if not r.ok:
+        raise RuntimeError(f"Erro ao publicar o carrossel: {r.status_code} {r.text}")
+    media_id = r.json()["id"]
+    link = requests.get(f"{API}/{media_id}", params={"fields": "permalink", "access_token": token}, timeout=30).json()
+    return link.get("permalink", media_id)

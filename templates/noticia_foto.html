@@ -46,7 +46,7 @@
 <body>
 <div class="post">
   <div class="foto">
-    <img class="bg" src="{{ imagem.uri }}" alt="">
+    <img class="bg" src="{{ imagem.uri }}" alt="" {% if imagem.posicao %}style="object-position: {{ imagem.posicao }}"{% endif %}>
     <div class="sombra" {% if imagem.clara %}style="background: linear-gradient(180deg, rgba(15,39,71,0.28) 0%, rgba(15,39,71,0) 22%);"{% endif %}></div>
     <div class="topo">
       <span class="tag">{{ tag }}</span>
@@ -59,7 +59,10 @@
     <div class="meio">
       {% if destaque %}<span class="destaque" style="font-size: {{ (tam_destaque * 0.55)|int }}px">{{ destaque }}</span>{% endif %}
       <h1 style="font-size: {{ (tam_manchete * 0.8)|int }}px">{{ manchete }}</h1>
-      <p class="resumo">{{ resumo }}</p>
+      {% if resumo %}<p class="resumo">{{ resumo }}</p>{% endif %}
+      {% if itens %}<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px">
+        {% for item in itens %}<div style="display: flex; align-items: center; gap: 16px; font-size: 27px; font-weight: 600"><span style="width: 18px; height: 18px; background: {{ e.destaque }}; border-radius: 4px; flex-shrink: 0"></span>{{ item }}</div>{% endfor %}
+      </div>{% endif %}
     </div>
 
     <div class="base">

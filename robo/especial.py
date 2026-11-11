@@ -29,20 +29,26 @@ def main() -> None:
     patrocinador = patrocinador or escolher_patrocinador(agora, "especial", dados.get("tag", ""))
     estilo = proximo_estilo(dados.get("layout"), dados.get("tema"))
 
-    contexto = {k: dados.get(k) for k in ("tag", "chamada", "titulo", "mostrar_marca", "texto", "itens", "local")}
-    contexto["fonte"] = dados.get("fonte") or dados.get("sub")
-    contexto["patrocinador"] = _logo(patrocinador)
-    if dados.get("imagem"):
-        # Post com foto/imagem enviada (ex.: imagem oficial de divulgação), no layout com foto.
-        contexto.update({
-            "destaque": dados.get("destaque", ""), "manchete": dados.get("titulo", ""),
-            "resumo": dados.get("texto", ""), "tam_destaque": 200, "tam_manchete": 76,
-            "imagem": {"uri": Path(dados["imagem"]).resolve().as_uri(), "credito": dados.get("credito_imagem", ""),
-                       "clara": bool(dados.get("imagem_clara"))},
-        })
-        renderizar("noticia_foto.html", contexto, estilo, pasta / "post.jpg")
-    else:
-        renderizar("especial.html", contexto, estilo, pasta / "post.jpg")
+    cards = dados.get("cards") or [dados]
+    for i, card in enumerate(cards, start=1):
+        base = {**dados, **card}
+        contexto = {k: base.get(k) for k in ("tag", "chamada", "titulo", "mostrar_marca", "texto", "itens", "local")}
+        contexto["fonte"] = base.get("fonte") or base.get("sub")
+        contexto["patrocinador"] = _logo(patrocinador)
+        destino = pasta / ("post.jpg" if len(cards) == 1 else f"post-{i}.jpg")
+        if base.get("imagem"):
+            contexto.update({
+                "destaque": base.get("destaque", ""), "manchete": base.get("titulo", ""),
+                "resumo": base.get("texto", ""), "tam_destaque": 200, "tam_manchete": base.get("tam_titulo", 76),
+                "imagem": {"uri": Path(base["imagem"]).resolve().as_uri(), "credito": base.get("credito_imagem", ""),
+                           "clara": bool(base.get("imagem_clara")), "posicao": base.get("posicao_imagem", "")},
+            })
+            renderizar("noticia_foto.html", contexto, estilo, destino)
+        else:
+            renderizar("especial.html", contexto, estilo, destino)
+    if len(cards) > 1:
+        import shutil
+        shutil.copy(pasta / "post-1.jpg", pasta / "post.jpg")  # capa, para a prévia
 
     post = {
         "categoria": dados.get("tag", "ESPECIAL"),

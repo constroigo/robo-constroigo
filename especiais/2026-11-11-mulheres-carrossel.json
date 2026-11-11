@@ -1,0 +1,52 @@
+{
+  "tag": "SETOR",
+  "patrocinador": "H2R Engenharia",
+  "tema": "azul",
+  "fonte": "Fontes: CBIC, Crea-GO e Confea",
+  "cards": [
+    {
+      "local": "GOIÁS · 2027",
+      "imagem": "especiais/img/eleitas-crea-go.jpg",
+      "credito_imagem": "Foto: Crea-GO",
+      "posicao_imagem": "center 40%",
+      "titulo": "Elas vão comandar a engenharia e a construção em Goiás",
+      "tam_titulo": 80,
+      "texto": "Pela primeira vez, mulheres vão presidir o Sinduscon-GO e o Crea-GO. E a Mútua-GO terá diretoria 100% feminina."
+    },
+    {
+      "tag": "SINDUSCON-GO",
+      "local": "GESTÃO 2027–2029",
+      "imagem": "especiais/img/carolina-lacerda-larga.jpg",
+      "credito_imagem": "Foto: Divulgação",
+      "posicao_imagem": "center 25%",
+      "titulo": "Carolina Lacerda",
+      "tam_titulo": 84,
+      "texto": "Primeira mulher a presidir o Sindicato da Indústria da Construção no Estado de Goiás em toda a sua história."
+    },
+    {
+      "tag": "CREA-GO",
+      "local": "A PARTIR DE 2027",
+      "imagem": "especiais/img/tatiana-juca.jpg",
+      "credito_imagem": "Foto: Divulgação",
+      "posicao_imagem": "center 18%",
+      "titulo": "Tatiana Jucá",
+      "tam_titulo": 84,
+      "texto": "Engenheira civil, será a primeira mulher a comandar o Crea-GO em mais de 90 anos de história do conselho."
+    },
+    {
+      "tag": "MÚTUA-GO",
+      "local": "2027–2029",
+      "imagem": "especiais/img/eleitas-crea-go.jpg",
+      "credito_imagem": "Foto: Crea-GO",
+      "posicao_imagem": "center 40%",
+      "titulo": "Diretoria 100% feminina na Mútua-GO",
+      "tam_titulo": 64,
+      "itens": [
+        "Juliana Matos · diretora-geral",
+        "Daniela Rézio · diretora administrativa",
+        "Andréia Gomes · diretora financeira"
+      ]
+    }
+  ],
+  "legenda": "A construção civil goiana entra em 2027 com uma marca histórica: mulheres no comando das principais entidades do setor. 👷‍♀️🏗️\n\n🔸 Carolina Lacerda foi eleita no dia 3 de novembro a primeira mulher a presidir o Sinduscon-GO em toda a sua história, para a gestão 2027–2029.\n\n🔸 Tatiana Jucá, engenheira civil, será a primeira mulher a presidir o Crea-GO em mais de 90 anos de história do conselho.\n\n🔸 Na Mútua-GO, a Caixa de Assistência dos Profissionais, a diretoria eleita também é toda feminina: Juliana Matos (diretora-geral), Daniela Rézio (diretora administrativa) e Andréia Gomes (diretora financeira).\n\nSegundo o Crea-GO, as eleitas do conselho e da Mútua formam o único grupo 100% feminino do país à frente de todos esses cargos estratégicos.\n\nUm setor que sempre foi visto como masculino agora tem mulheres liderando a representação de empresas e profissionais em Goiás. Que venham grandes gestões! 👏\n\n➡️ Arraste para o lado e conheça cada uma.\n\nMarque aqui uma engenheira, arquiteta ou empresária da construção que você admira. 👇\n\n✍️ Por Higor Siqueira\n📰 Fontes: CBIC, Crea-GO e Confea | Fotos: Crea-GO e divulgação\n\n#constroigo #mulheresnaconstrucao #mulheresnaengenharia #sindusconGO #creaGO #mutua #construcaocivil #goias #goiania #engenharia"
+}

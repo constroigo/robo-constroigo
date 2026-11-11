@@ -16,7 +16,14 @@ def url_publica(pasta: str, arquivo: str = "post.jpg") -> str:
     return f"https://raw.githubusercontent.com/{github.repo()}/main/{pasta}/{arquivo}"
 
 
+def _cards(pasta: str) -> list[str]:
+    return sorted((p.name for p in Path(pasta).glob("post-*.jpg")), key=lambda n: int(n[5:-4]))
+
+
 def _publicar(pasta: str, post: dict) -> str:
+    cards = _cards(pasta)
+    if len(cards) > 1:
+        return instagram.publicar_carrossel([url_publica(pasta, c) for c in cards], post["legenda_final"])
     if (Path(pasta) / "video.mp4").exists():
         capa = url_publica(pasta) if (Path(pasta) / "post.jpg").exists() else None
         return instagram.publicar_video(url_publica(pasta, "video.mp4"), post["legenda_final"], capa)
@@ -43,7 +50,8 @@ def abrir(pasta: str) -> None:
     corpo = (
         alertas
         + previa
-        + (f"![arte]({url})\n\n" if (Path(pasta) / "post.jpg").exists() else "")
+        + ("".join(f"![card]({url_publica(pasta, c)})\n" for c in _cards(pasta)) + "\n" if _cards(pasta)
+           else (f"![arte]({url})\n\n" if (Path(pasta) / "post.jpg").exists() else ""))
         + f"**Legenda:**\n\n```\n{post['legenda_final']}\n```\n\n"
         f"**Notícia original:** [{post['noticia']['titulo']}]({post['noticia']['link']}) — "
         f"{post['noticia']['fonte']}\n\n"
