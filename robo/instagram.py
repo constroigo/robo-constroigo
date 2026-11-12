@@ -106,7 +106,7 @@ def publicar_video(url_video: str, legenda: str, capa_url: str | None = None) ->
     return link.get("permalink", media_id)
 
 
-def publicar_carrossel(urls: list[str], legenda: str) -> str:
+def publicar_carrossel(urls: list[str], legenda: str, colaboradores: list[str] | None = None) -> str:
     token = os.environ["IG_ACCESS_TOKEN"].strip()
     API = _api(token)
     usuario = (os.environ.get("IG_USER_ID") or "").strip() or "me"
@@ -125,8 +125,14 @@ def publicar_carrossel(urls: list[str], legenda: str) -> str:
             if s.get("status_code") == "ERROR":
                 raise RuntimeError(f"O Instagram recusou uma imagem do carrossel: {s}")
             time.sleep(5)
-    r = requests.post(f"{API}/{usuario}/media", data={"media_type": "CAROUSEL", "children": ",".join(filhos),
-                      "caption": legenda, "access_token": token}, timeout=60)
+    dados = {"media_type": "CAROUSEL", "children": ",".join(filhos), "caption": legenda, "access_token": token}
+    if colaboradores:  # convite de collab (cada conta precisa aceitar no app)
+        import json as _json
+        r = requests.post(f"{API}/{usuario}/media", data={**dados, "collaborators": _json.dumps(colaboradores)}, timeout=60)
+        if not r.ok:
+            print(f"Collab recusado pela API ({r.status_code} {r.text}); publicando sem collab.")
+    if not colaboradores or not r.ok:
+        r = requests.post(f"{API}/{usuario}/media", data=dados, timeout=60)
     if not r.ok:
         raise RuntimeError(f"Erro ao criar o carrossel: {r.status_code} {r.text}")
     container = r.json()["id"]

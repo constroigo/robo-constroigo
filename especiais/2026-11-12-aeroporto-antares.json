@@ -1,0 +1,46 @@
+{
+  "tag": "OBRAS",
+  "local": "APARECIDA DE GOIÂNIA",
+  "titulo": "Aeroporto Antares: a Grande Goiânia ganha um novo portão para o país",
+  "patrocinador": "H2R Engenharia",
+  "tema": "azul",
+  "fonte": "Fontes: Antares Polo Aeronáutico e H2R Engenharia",
+  "credito_imagem": "Foto: H2R Engenharia",
+  "colaboradores": ["antarespoloaeronautico", "h2rengenharia"],
+  "cards": [
+    {
+      "imagem": "especiais/img/antares-1.jpg",
+      "posicao_imagem": "center 45%",
+      "tam_titulo": 72,
+      "titulo": "Aeroporto Antares: a Grande Goiânia ganha um novo portão para o país",
+      "texto": "Polo aeronáutico 100% privado em Aparecida de Goiânia. A terraplenagem da pista é da H2R Engenharia."
+    },
+    {
+      "imagem": "especiais/img/antares-2.jpg",
+      "posicao_imagem": "30% center",
+      "tag": "ANTARES",
+      "local": "GRANDE GOIÂNIA",
+      "titulo": "Um aeroporto de outro nível",
+      "itens": [
+        "209 hectares de área",
+        "Pista de 2.000 m x 30 m",
+        "Preparado para jatos como Boeing 737-800 e Airbus A320",
+        "Hangares, terminal, pátio e helicentro",
+        "Ao lado da BR-153, a 210 km de Brasília"
+      ]
+    },
+    {
+      "imagem": "especiais/img/antares-3.jpg",
+      "posicao_imagem": "center 40%",
+      "tag": "H2R ENGENHARIA",
+      "local": "ANDAMENTO DA OBRA",
+      "titulo": "Pista tomando forma",
+      "itens": [
+        "Terraplenagem da pista praticamente concluída",
+        "Rede de águas pluviais 90% pronta",
+        "2027: pavimentação e portarias"
+      ]
+    }
+  ],
+  "legenda": "A Grande Goiânia está ganhando um novo portão para o Brasil! ✈️\n\nO Antares Polo Aeronáutico, em Aparecida de Goiânia, é um polo 100% privado de aviação geral e executiva, pensado para empresas da indústria, do agro, da logística, do comércio e do turismo.\n\n📌 Os números impressionam:\n• 209 hectares de área\n• Pista de 2.000 metros por 30 metros\n• Estrutura preparada para jatos do porte do Boeing 737-800 e do Airbus A320\n• Hangares, terminal de passageiros, pátio de aeronaves e helicentro\n• Acesso rápido pela BR-153, a 210 km de Brasília\n\nÉ um empreendimento que coloca Goiânia e Aparecida em outro patamar na aviação do Centro-Oeste — mais negócios, mais empregos e mais conexão com o país.\n\n🏗️ E quem está tirando a pista do papel é a H2R Engenharia. A terraplenagem da pista está praticamente concluída, e a rede de águas pluviais já chegou a 90%. Para o ano que vem, a previsão é de pavimentação e portarias.\n\nOrgulho de fazer parte de uma obra desse tamanho! 💪\n\n➡️ Arraste para o lado e veja a obra.\n\n✍️ Por Higor Siqueira\n📸 Fotos: H2R Engenharia\n📰 Fontes: Antares Polo Aeronáutico e H2R Engenharia\n\n@antarespoloaeronautico @h2rengenharia\n\n#constroigo #antares #aeroporto #aviacao #aparecidadegoiania #goiania #goias #terraplenagem #infraestrutura #h2rengenharia #engenharia #construcaocivil"
+}

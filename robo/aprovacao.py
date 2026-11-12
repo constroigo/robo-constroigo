@@ -23,7 +23,7 @@ def _cards(pasta: str) -> list[str]:
 def _publicar(pasta: str, post: dict) -> str:
     cards = _cards(pasta)
     if len(cards) > 1:
-        return instagram.publicar_carrossel([url_publica(pasta, c) for c in cards], post["legenda_final"])
+        return instagram.publicar_carrossel([url_publica(pasta, c) for c in cards], post["legenda_final"], post.get("colaboradores"))
     if (Path(pasta) / "video.mp4").exists():
         capa = url_publica(pasta) if (Path(pasta) / "post.jpg").exists() else None
         return instagram.publicar_video(url_publica(pasta, "video.mp4"), post["legenda_final"], capa)

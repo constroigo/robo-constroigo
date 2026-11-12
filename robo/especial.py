@@ -63,6 +63,7 @@ def main() -> None:
         "legenda_final": dados["legenda"],
         "horario": "especial",
         "alertas": [],
+        "colaboradores": dados.get("colaboradores", []),
         "patrocinador": patrocinador["nome"] if patrocinador else "",
         "estilo": f"{estilo['nome_tema']}/{estilo['layout']}",
         "noticia": {"titulo": "Post especial (sem notícia de origem)", "link": "", "fonte": "Constrói GO"},
