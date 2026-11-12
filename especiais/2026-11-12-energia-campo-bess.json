@@ -1,0 +1,48 @@
+{
+  "tag": "ENERGIA",
+  "local": "BRASIL",
+  "titulo": "Faltou energia, a produção vai embora",
+  "patrocinador": "H2R Energia",
+  "tema": "marinho",
+  "fonte": "Fontes: CNA/Faep, O Popular, Tribuna PR e BNEF",
+  "cards": [
+    {
+      "busca_foto": "power lines farm field",
+      "categoria_foto": "ENERGIA",
+      "tam_titulo": 80,
+      "titulo": "Faltou energia, a produção vai embora",
+      "texto": "Quedas de luz viraram rotina no campo. E quem paga a conta é o produtor rural."
+    },
+    {
+      "chamada": "Energia no campo",
+      "titulo": "O tamanho do problema",
+      "itens": [
+        "PR: reclamações contra a Copel na Aneel subiram 110% em 12 meses",
+        "PR: produtor perdeu 900 mil kg de tilápia, R$ 9 milhões",
+        "GO: Equatorial estourou o limite de duração das quedas em 72% das áreas em 2024",
+        "Leite descartado, ordenha parada e equipamento queimado"
+      ]
+    },
+    {
+      "chamada": "Como se proteger",
+      "titulo": "Gerador ou bateria?",
+      "texto": "O gerador a diesel resolve, mas tem combustível, manutenção, barulho e alguns segundos até assumir a carga. O sistema de baterias (BESS) é a nova geração:",
+      "itens": [
+        "Assume a carga na hora, sem a produção parar",
+        "Sem combustível e sem ruído",
+        "Com solar, guarda energia limpa e reduz a conta",
+        "Custo dos sistemas caiu 31% em 2025 (BNEF)"
+      ]
+    },
+    {
+      "imagem": "especiais/img/moises-fernando.jpg",
+      "credito_imagem": "Foto: arquivo pessoal",
+      "tag": "OPINIÃO",
+      "local": "ESPECIALISTA",
+      "tam_titulo": 84,
+      "titulo": "“Bateria não é luxo, é segurança.”",
+      "texto": "Moisés Fernando, engenheiro eletricista"
+    }
+  ],
+  "legenda": "Faltou energia na fazenda, a produção vai embora. ⚡🐄\n\nQuedas no fornecimento viraram rotina no campo brasileiro, e o prejuízo quase sempre fica com o produtor: leite descartado, ordenha parada, animais sem água, peixes sem oxigênio e equipamentos queimados.\n\n📌 Alguns números:\n• No Paraná, as reclamações contra a Copel na Aneel subiram 110% em 12 meses (CNA/Faep)\n• Um produtor de Tupãssi (PR) perdeu 900 mil kg de tilápia, prejuízo estimado em R$ 9 milhões\n• Em Goiás, a Equatorial descumpriu o limite de duração das quedas em 72% dos conjuntos atendidos em 2024 (O Popular)\n\n🔌 Como se proteger?\nA solução tradicional é o gerador a diesel: funciona, mas depende de combustível, manutenção e leva alguns segundos para assumir a carga.\n\nA novidade são as baterias (BESS — sistema de armazenamento de energia em baterias). Elas assumem a carga na hora, sem barulho e sem combustível. Combinadas com energia solar, guardam energia limpa e ajudam a reduzir a conta ao longo dos anos. E estão ficando mais baratas: o custo dos sistemas caiu 31% em 2025, segundo a BloombergNEF.\n\n💬 “Bateria não é luxo, é segurança.” — Moisés Fernando, engenheiro eletricista\n\nVocê já perdeu produção por falta de energia? Conta aqui! 👇\n\n➡️ Arraste para o lado.\n\n✍️ Por Higor Siqueira\n📰 Fontes: CNA/Faep, O Popular, Tribuna PR e BloombergNEF\n\n#constroigo #energia #bess #baterias #armazenamentodeenergia #energiasolar #agro #produtorrural #faltadeenergia #goias #h2renergia #engenharia"
+}
