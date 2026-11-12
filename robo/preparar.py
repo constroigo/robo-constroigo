@@ -24,9 +24,10 @@ def escolher_patrocinador(quando: datetime, horario: str, categoria: str = "") -
     for p in PATROCINADORES:
         if p["nome"] == preferido:
             return p
+    rodizio = [p for p in PATROCINADORES if p.get("rodizio", True)]
     ordem = list(HORARIOS).index(horario) if horario in HORARIOS else 0
-    indice = (quando.timetuple().tm_yday * len(HORARIOS) + ordem) % len(PATROCINADORES)
-    return PATROCINADORES[indice]
+    indice = (quando.timetuple().tm_yday * len(HORARIOS) + ordem) % len(rodizio)
+    return rodizio[indice]
 
 
 def saida(nome: str, valor: str) -> None:

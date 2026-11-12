@@ -67,6 +67,8 @@ PATROCINADORES = [
     {"nome": "Histórias Helvécia", "logo": "assets/patrocinadores/historias-helvecia.png"},
     {"nome": "H2R Incorp", "logo": "assets/patrocinadores/h2r-incorp.png"},
     {"nome": "H2R Energia", "logo": "assets/patrocinadores/h2r-energia.png"},
+    # Parceiros externos: só entram quando escolhidos (post especial ou categoria), fora do rodízio.
+    {"nome": "Recurso Sustentável", "logo": "assets/patrocinadores/recurso-sustentavel.png", "rodizio": False},
 ]
 
 # Anunciante preferido por assunto do post (o resto entra em rodízio).
@@ -81,6 +83,7 @@ PATROCINADOR_POR_CATEGORIA = {
     "TECNOLOGIA": "H2R Energia",
     "ECONOMIA": "H2R Incorp",
     "NOVIDADE": "H2R Engenharia",
+    "MEIO AMBIENTE": "Recurso Sustentável",
 }
 
 HASHTAGS_FIXAS = ["#constroigo", "#construcaocivil", "#goias", "#goiania", "#engenharia"]
