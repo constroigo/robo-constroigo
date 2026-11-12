@@ -36,6 +36,14 @@ def main() -> None:
         contexto["fonte"] = base.get("fonte") or base.get("sub")
         contexto["patrocinador"] = _logo(patrocinador)
         destino = pasta / ("post.jpg" if len(cards) == 1 else f"post-{i}.jpg")
+        if base.get("imagem_url") and not card.get("imagem"):
+            import requests
+            pasta.mkdir(parents=True, exist_ok=True)
+            arq = pasta / f"foto-{i}.jpg"
+            r = requests.get(base["imagem_url"], timeout=60, headers={"User-Agent": "Mozilla/5.0"})
+            r.raise_for_status()
+            arq.write_bytes(r.content)
+            base["imagem"] = str(arq)
         if base.get("busca_foto") and not base.get("imagem"):
             from .imagens import pixabay
             pasta.mkdir(parents=True, exist_ok=True)
