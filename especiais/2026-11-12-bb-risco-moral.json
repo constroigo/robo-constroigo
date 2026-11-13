@@ -7,11 +7,12 @@
   "fonte": "Fontes: AgriBiz, Agência Brasil, Bloomberg Línea, Suno, Serasa e CNC",
   "cards": [
     {
-      "busca_foto": "soybean harvest combine",
-      "categoria_foto": "",
       "tam_titulo": 74,
       "titulo": "Você concorda com a presidente do Banco do Brasil?",
-      "texto": "Tarciana Medeiros diz que parte dos devedores do agro se nega a renegociar. O setor reagiu."
+      "texto": "Tarciana Medeiros diz que parte dos devedores do agro se nega a renegociar. O setor reagiu.",
+      "imagem": "especiais/img/tarciana-medeiros.jpg",
+      "credito_imagem": "Foto: reprodução",
+      "posicao_imagem": "center 30%"
     },
     {
       "chamada": "O que disse o BB",
@@ -21,7 +22,11 @@
         "Lucro ajustado de R$ 1,27 bi no 3º tri, queda de 66,5%",
         "Inadimplência do agro acima de 90 dias: 6,92% em setembro",
         "Só 15% dos inadimplentes aderiram à renegociação da MP 1.376"
-      ]
+      ],
+      "imagem": "especiais/img/bb-logo-banner.jpg",
+      "credito_imagem": "",
+      "imagem_clara": true,
+      "tag": "BANCO DO BRASIL"
     },
     {
       "chamada": "E os outros bancos?",
