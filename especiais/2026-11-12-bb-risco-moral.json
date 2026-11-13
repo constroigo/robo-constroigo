@@ -1,0 +1,60 @@
+{
+  "tag": "ECONOMIA",
+  "local": "BRASIL",
+  "titulo": "Você concorda com a presidente do Banco do Brasil?",
+  "patrocinador": "H2R Incorp",
+  "tema": "marinho",
+  "fonte": "Fontes: AgriBiz, Agência Brasil, Bloomberg Línea, Suno, Serasa e CNC",
+  "cards": [
+    {
+      "busca_foto": "soybean harvest combine",
+      "categoria_foto": "",
+      "tam_titulo": 74,
+      "titulo": "Você concorda com a presidente do Banco do Brasil?",
+      "texto": "Tarciana Medeiros diz que parte dos devedores do agro se nega a renegociar. O setor reagiu."
+    },
+    {
+      "chamada": "O que disse o BB",
+      "titulo": "“Risco moral” no agro",
+      "texto": "“Não contávamos com a persistência e intencionalidade do risco moral”, disse Tarciana Medeiros.",
+      "itens": [
+        "Lucro ajustado de R$ 1,27 bi no 3º tri, queda de 66,5%",
+        "Inadimplência do agro acima de 90 dias: 6,92% em setembro",
+        "Só 15% dos inadimplentes aderiram à renegociação da MP 1.376"
+      ]
+    },
+    {
+      "chamada": "E os outros bancos?",
+      "titulo": "Inadimplência subiu, mas o lucro veio",
+      "texto": "Lucro no 3º tri de 2026 e inadimplência acima de 90 dias:",
+      "itens": [
+        "Itaú: R$ 12,6 bi (+6,2%) · inadimplência 2,0%",
+        "Bradesco: R$ 7,1 bi (+14,6%) · inadimplência 4,6%",
+        "Santander: R$ 2,9 bi (−28%) · inadimplência 3,4%",
+        "Banco do Brasil: R$ 1,27 bi (−66,5%)"
+      ]
+    },
+    {
+      "chamada": "O outro lado",
+      "titulo": "O que diz o produtor",
+      "texto": "A Aprosoja repudiou a fala e diz que a crise não é má-fé. Aponta:",
+      "itens": [
+        "Clima e quebras de safra",
+        "Custos altos e preços agrícolas em queda",
+        "Juros elevados",
+        "Inadimplência histórica baixa: 1,89% entre 2015 e 2019"
+      ]
+    },
+    {
+      "chamada": "E as famílias?",
+      "titulo": "O aperto não é só no campo",
+      "itens": [
+        "83,9 milhões de brasileiros inadimplentes, 51% dos adultos (Serasa, agosto)",
+        "79,5% das famílias endividadas em outubro (CNC)",
+        "Juros altos apertam produtor, empresa e consumidor"
+      ],
+      "texto": "E aí: falta de vontade de pagar ou falta de condição? Comenta!"
+    }
+  ],
+  "legenda": "Você concorda com a presidente do Banco do Brasil? 🤔🌾\n\nAo comentar o balanço do 3º trimestre, a presidente do BB, Tarciana Medeiros, disse que parte dos médios e grandes produtores se nega a pagar, renegociar ou dar garantias, mesmo com safras recordes — e chamou isso de “risco moral”. O lucro ajustado do banco caiu 66,5%, para R$ 1,27 bilhão, e só 15% dos inadimplentes aderiram à renegociação da MP 1.376.\n\n🏦 E os outros bancos? A inadimplência também subiu, mas os resultados foram bem diferentes no trimestre:\n• Itaú: lucro de R$ 12,6 bi (+6,2%), inadimplência de 2,0%\n• Bradesco: R$ 7,1 bi (+14,6%), inadimplência de 4,6%\n• Santander: R$ 2,9 bi (−28%), inadimplência de 3,4%, com pressão no agro e na baixa renda\n(As carteiras são diferentes: o BB é o maior financiador do agro.)\n\n🌾 O outro lado: a Aprosoja repudiou a fala e diz que a crise não é má-fé, e sim resultado de clima, quebras de safra, custos altos, preços em queda e juros elevados. Lembra que a inadimplência rural média foi de 1,89% entre 2015 e 2019.\n\n👨‍👩‍👧 E as famílias? A Serasa contou 83,9 milhões de inadimplentes em agosto (51% dos adultos), e a CNC aponta 79,5% das famílias endividadas em outubro.\n\nE você: é falta de vontade de pagar ou falta de condição? Comenta! 👇\n\n➡️ Arraste para o lado.\n\n✍️ Por Higor Siqueira\n📰 Fontes: The AgriBiz, Agência Brasil, Bloomberg Línea, Suno, Mercado & Consumo, Aprosoja (via SBT News), Serasa e CNC\n\n#constroigo #bancodobrasil #agro #agronegocio #inadimplencia #credito #economia #juros #goias #produtorrural"
+}
