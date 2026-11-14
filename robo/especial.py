@@ -64,6 +64,10 @@ def main() -> None:
     if len(cards) > 1:
         import shutil
         shutil.copy(pasta / "post-1.jpg", pasta / "post.jpg")  # capa, para a prévia
+    else:
+        from . import video
+        if dados.get("reel", True) and video.ativo() and not (pasta / "video.mp4").exists():
+            video.gerar(pasta / "post.jpg", pasta / "video.mp4")
 
     post = {
         "categoria": dados.get("tag", "ESPECIAL"),

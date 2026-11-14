@@ -66,6 +66,9 @@ def main() -> None:
     pasta = Path("posts") / f"{agora:%Y-%m-%d}-{horario}-{agora:%H%M%S}"
     imagem = imagens.obter(post, pasta) if os.environ.get("USAR_IMAGENS", "sim").lower() != "nao" else None
     gerar_arte(post, patrocinador, pasta / "post.jpg", agora, imagem=imagem)
+    from . import video
+    if video.ativo() and video.gerar(pasta / "post.jpg", pasta / "video.mp4"):
+        print("Reel com vinheta gerado.")
     if imagem:
         post["imagem"] = {"origem": imagem["origem"], "credito": imagem["credito"]}
         Path(imagem["arquivo"]).unlink(missing_ok=True)  # só a arte final fica no repositório
