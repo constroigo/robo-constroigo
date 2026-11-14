@@ -9,7 +9,17 @@ FUNDO = "0x0f2240"  # azul-marinho da marca
 
 
 def ativo() -> bool:
-    return os.environ.get("REELS_COM_MUSICA", "sim").lower() == "sim" and MUSICA.exists()
+    """Alterna: um post de card único sai como Reel, o seguinte como imagem, e assim por diante.
+    REELS_COM_MUSICA=sempre força todos; =nao desliga."""
+    modo = os.environ.get("REELS_COM_MUSICA", "alternar").lower()
+    if modo == "nao" or not MUSICA.exists():
+        return False
+    if modo == "sempre":
+        return True
+    pastas = sorted(p for p in Path("posts").glob("*") if p.is_dir() and (p / "post.json").exists()
+                    and not list(p.glob("post-*.jpg")))
+    ultimo_foi_reel = bool(pastas) and (pastas[-1] / "video.mp4").exists()
+    return not ultimo_foi_reel
 
 
 def gerar(imagem: Path, destino: Path) -> Path | None:
