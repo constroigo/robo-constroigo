@@ -66,7 +66,8 @@ def main() -> None:
         shutil.copy(pasta / "post-1.jpg", pasta / "post.jpg")  # capa, para a prévia
     else:
         from . import video
-        if dados.get("reel", True) and video.ativo() and not (pasta / "video.mp4").exists():
+        reel = dados.get("reel")  # true força Reel, false desliga, ausente alterna
+        if reel is not False and (reel is True or video.ativo()) and not (pasta / "video.mp4").exists():
             video.gerar(pasta / "post.jpg", pasta / "video.mp4")
 
     post = {
