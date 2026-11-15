@@ -16,10 +16,21 @@ def ativo() -> bool:
         return False
     if modo == "sempre":
         return True
-    pastas = sorted(p for p in Path("posts").glob("*") if p.is_dir() and (p / "post.json").exists()
-                    and not list(p.glob("post-*.jpg")))
+    def quando(p: Path) -> str:  # pasta = AAAA-MM-DD-horario-HHMMSS
+        partes = p.name.split("-")
+        return "-".join(partes[:3]) + partes[-1]
+    pastas = sorted((p for p in Path("posts").glob("*") if p.is_dir() and (p / "post.json").exists()
+                     and not list(p.glob("post-*.jpg"))), key=quando)
     ultimo_foi_reel = bool(pastas) and (pastas[-1] / "video.mp4").exists()
     return not ultimo_foi_reel
+
+
+def _ffmpeg() -> str:
+    import shutil
+    if shutil.which("ffmpeg"):
+        return "ffmpeg"
+    import imageio_ffmpeg  # binário estático, para o runner do GitHub
+    return imageio_ffmpeg.get_ffmpeg_exe()
 
 
 def gerar(imagem: Path, destino: Path) -> Path | None:
@@ -31,7 +42,7 @@ def gerar(imagem: Path, destino: Path) -> Path | None:
         f"[bg][card]overlay=0:285,format=yuv420p[v];"
         f"[1:a]atrim=0:{DURACAO},afade=t=out:st={DURACAO - 1.5}:d=1.5[a]"
     )
-    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-i", str(imagem), "-i", str(MUSICA),
+    cmd = [_ffmpeg(), "-y", "-loglevel", "error", "-loop", "1", "-i", str(imagem), "-i", str(MUSICA),
            "-filter_complex", filtro, "-map", "[v]", "-map", "[a]", "-t", str(DURACAO),
            "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "160k",
            "-movflags", "+faststart", str(destino)]
