@@ -31,6 +31,8 @@
                   {% if e.nome_tema == 'claro' %}border: 2px solid #D5DBE5;{% endif %} }
   .oferecimento span.rot { font-size: 17px; font-weight: 700; letter-spacing: 0.12em; color: #4A5568; }
   .oferecimento .marca { font-size: 24px; font-weight: 800; }
+  .oferecimento .contato { display: flex; flex-direction: column; gap: 2px; margin-left: auto; margin-right: 22px; text-align: right;
+                           font-size: 17px; font-weight: 600; color: #0F2747; line-height: 1.25; }
   .oferecimento img { height: 54px; max-width: 340px; object-fit: contain; border-radius: 6px; }
   .rodape { display: flex; align-items: center; justify-content: space-between;
             border-top: 2px solid {{ e.linha }}; padding-top: 22px; }
@@ -69,6 +71,7 @@
       {% if patrocinador %}
       <div class="oferecimento">
         <span class="rot">OFERECIMENTO</span>
+      {% if patrocinador.contato %}<span class="contato">{% for l in patrocinador.contato %}<span>{{ l }}</span>{% endfor %}</span>{% endif %}
         {% if patrocinador.logo_uri %}<img src="{{ patrocinador.logo_uri }}" alt="{{ patrocinador.nome }}">
         {% else %}<span class="marca">{{ patrocinador.nome }}</span>{% endif %}
       </div>

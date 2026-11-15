@@ -62,7 +62,8 @@ FONTES_PREFERIDAS = [
 # Faixa "Oferecimento": um anunciante por post, em rodízio.
 # Para usar a logo, coloque o arquivo em assets/patrocinadores/ e preencha "logo".
 PATROCINADORES = [
-    {"nome": "H2R Engenharia", "logo": "assets/patrocinadores/h2r.png"},
+    {"nome": "H2R Engenharia", "logo": "assets/patrocinadores/h2r.png",
+     "contato": ["@h2rengenhariagoiania · (62) 3249-5980", "contato@h2rengenharia.com.br"]},
     {"nome": "Siqueira Locação", "logo": "assets/patrocinadores/siqueira-locacao.png"},
     {"nome": "Histórias Helvécia", "logo": "assets/patrocinadores/historias-helvecia.png"},
     {"nome": "H2R Incorp", "logo": "assets/patrocinadores/h2r-incorp.png"},
