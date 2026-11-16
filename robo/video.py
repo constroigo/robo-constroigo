@@ -52,3 +52,31 @@ def gerar(imagem: Path, destino: Path) -> Path | None:
     except Exception as erro:  # sem vídeo, o post sai como imagem normal
         print(f"Vídeo não gerado ({erro}); segue como imagem.")
         return None
+
+
+def gerar_slides(imagens: list[Path], destino: Path, segundos: float = 3.0) -> Path | None:
+    """Vários cards em sequência (Reel de carrossel), com transição suave e a vinheta em loop."""
+    n = len(imagens)
+    total = n * segundos
+    entradas, filtros = [], []
+    for i, img in enumerate(imagens):
+        entradas += ["-loop", "1", "-t", str(segundos + 0.5), "-i", str(img)]
+        filtros.append(f"[{i}:v]scale=1080:1350,setsar=1,fps=30,format=yuv420p[c{i}]")
+    cadeia, ant = [], "c0"
+    for i in range(1, n):
+        cadeia.append(f"[{ant}][c{i}]xfade=transition=slideleft:duration=0.4:offset={i * segundos - 0.4 + 0.0:.2f}[x{i}]")
+        ant = f"x{i}"
+    fc = ";".join(filtros + cadeia + [
+        f"color=c={FUNDO}:s=1080x1920:d={total}[bg]",
+        f"[bg][{ant}]overlay=0:285,format=yuv420p[v]",
+        f"[{n}:a]atrim=0:{total},afade=t=out:st={total - 1.5}:d=1.5[a]"])
+    cmd = [_ffmpeg(), "-y", "-loglevel", "error", *entradas, "-stream_loop", "-1", "-i", str(MUSICA),
+           "-filter_complex", fc, "-map", "[v]", "-map", "[a]", "-t", str(total),
+           "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "160k",
+           "-movflags", "+faststart", str(destino)]
+    try:
+        subprocess.run(cmd, check=True, timeout=600)
+        return destino
+    except Exception as erro:
+        print(f"Vídeo de slides não gerado ({erro}).")
+        return None

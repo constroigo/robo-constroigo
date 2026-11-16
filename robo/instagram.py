@@ -76,7 +76,8 @@ def renovar_token() -> str | None:
     return r.json()["access_token"]
 
 
-def publicar_video(url_video: str, legenda: str, capa_url: str | None = None) -> str:
+def publicar_video(url_video: str, legenda: str, capa_url: str | None = None,
+                   colaboradores: list[str] | None = None) -> str:
     """Publica um Reel (vídeo vertical, até 90 s recomendado)."""
     token = os.environ["IG_ACCESS_TOKEN"].strip()
     API = _api(token)
@@ -85,7 +86,14 @@ def publicar_video(url_video: str, legenda: str, capa_url: str | None = None) ->
              "share_to_feed": "true", "access_token": token}
     if capa_url:
         dados["cover_url"] = capa_url
-    r = requests.post(f"{API}/{usuario}/media", data=dados, timeout=60)
+    r = None
+    if colaboradores:
+        import json as _json
+        r = requests.post(f"{API}/{usuario}/media", data={**dados, "collaborators": _json.dumps(colaboradores)}, timeout=60)
+        if not r.ok:
+            print(f"Collab recusado pela API ({r.status_code} {r.text}); publicando sem collab.")
+    if r is None or not r.ok:
+        r = requests.post(f"{API}/{usuario}/media", data=dados, timeout=60)
     if not r.ok:
         raise RuntimeError(f"Erro ao criar o Reel: {r.status_code} {r.text}")
     container = r.json()["id"]

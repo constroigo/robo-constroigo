@@ -64,6 +64,10 @@ def main() -> None:
     if len(cards) > 1:
         import shutil
         shutil.copy(pasta / "post-1.jpg", pasta / "post.jpg")  # capa, para a prévia
+        if dados.get("reel") is True:  # carrossel publicado como Reel com a vinheta
+            from . import video
+            video.gerar_slides(sorted(pasta.glob("post-*.jpg"), key=lambda p: int(p.stem.split("-")[1])),
+                               pasta / "video.mp4")
     else:
         from . import video
         reel = dados.get("reel")  # true força Reel, false desliga, ausente alterna
