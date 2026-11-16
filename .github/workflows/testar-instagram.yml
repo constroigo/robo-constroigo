@@ -20,3 +20,9 @@ jobs:
           echo "Tipo de chave: ${T:0:3}… | API: $API"
           curl -sS "$API/$IG_USER_ID?fields=username,followers_count,media_count&access_token=$T" | sed "s/$T/***/g"
           echo
+          echo "--- dono da chave ---"
+          curl -sS "$API/me?fields=id,name&access_token=$T" | sed "s/$T/***/g"; echo
+          echo "--- permissões ---"
+          curl -sS "$API/me/permissions?access_token=$T" | sed "s/$T/***/g"; echo
+          echo "--- páginas e Instagram ligados ---"
+          curl -sS "$API/me/accounts?fields=name,instagram_business_account{username}&access_token=$T" | sed "s/$T/***/g"; echo
