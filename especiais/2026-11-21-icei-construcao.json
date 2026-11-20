@@ -1,39 +1,49 @@
 {
-  "tag": "ECONOMIA",
+  "tag": "ALERTA",
   "local": "GOIÁS",
-  "titulo": "Construção goiana segue mais otimista que a indústria",
+  "titulo": "Confiança despenca na indústria e na construção",
   "patrocinador": "H2R Engenharia",
-  "tema": "azul",
+  "tema": "vermelho",
   "fonte": "Fonte: FIEG/CNI (ICEI de novembro), via Sinduscon-GO",
   "cards": [
     {
       "busca_foto": "construction workers helmet building site",
       "categoria_foto": "OBRAS",
-      "tam_titulo": 76,
-      "titulo": "Construção goiana segue mais otimista que a indústria",
-      "texto": "O índice de confiança da construção em Goiás ficou em 48,6 pontos em novembro, bem acima dos 39,5 da indústria goiana."
+      "tam_titulo": 80,
+      "titulo": "Confiança despenca na indústria e na construção",
+      "texto": "A indústria goiana tem o pior nível de confiança de 2026. A construção completa 6 meses seguidos no vermelho."
     },
     {
-      "chamada": "ICEI da construção · Goiás",
-      "titulo": "Confiança em 48,6 pontos",
+      "chamada": "Indústria goiana",
+      "titulo": "O pior nível do ano: 39,5 pontos",
       "itens": [
-        "Pouco abaixo dos 49,1 de outubro",
-        "Abaixo de 50 (sem confiança) desde junho",
-        "Expectativas em 50,2: o empresário ainda espera melhora nos próximos 6 meses",
-        "Avaliação do momento atual subiu 2,4 pontos, para 45,5"
+        "ICEI da indústria goiana cai para 39,5, o menor de 2026",
+        "No Brasil, o tombo foi de 6 pontos em um mês, para 40,2",
+        "Expectativas no chão: 39,7 pontos",
+        "O industrial já não espera um futuro melhor que o presente"
       ]
     },
     {
-      "chamada": "E a indústria?",
-      "titulo": "Indústria goiana no menor nível do ano",
+      "chamada": "Construção civil",
+      "titulo": "6 meses seguidos sem confiança",
       "itens": [
-        "ICEI da indústria goiana: 39,5 pontos, o menor de 2026",
-        "No Brasil, o índice caiu 6 pontos, para 40,2",
-        "Selic em 13,75% e dólar em alta pesam no crédito e nos insumos",
-        "Na construção, juros altos são o principal problema para 4 em cada 10 empresários"
+        "ICEI da construção cai de 49,1 para 48,6",
+        "Abaixo da linha dos 50 pontos desde junho",
+        "Expectativas recuam 1,9 ponto e ficam no limite: 50,2",
+        "Juros altos são o principal problema para 4 em cada 10 empresários"
+      ]
+    },
+    {
+      "chamada": "Por que isso preocupa",
+      "titulo": "Crédito caro trava a obra",
+      "itens": [
+        "Selic em 13,75%, sem previsão de corte",
+        "Dólar e juros futuros disparam com a incerteza fiscal",
+        "Financiamento mais caro para a empresa e para quem compra imóvel",
+        "Menos confiança hoje = menos obras e menos empregos amanhã"
       ],
-      "texto": "Na sua empresa, a confiança subiu ou caiu? Comenta!"
+      "texto": "Sua empresa já está sentindo? Comenta!"
     }
   ],
-  "legenda": "A construção goiana segue mais confiante que o resto da indústria. 📊🏗️\n\nO Índice de Confiança do Empresário Industrial (ICEI) da construção em Goiás ficou em 48,6 pontos em novembro, pouco abaixo dos 49,1 de outubro, segundo a FIEG/CNI. O setor está abaixo da linha dos 50 pontos (sem confiança) desde junho, mas bem menos pessimista que a indústria goiana como um todo, cujo índice caiu para 39,5, o menor nível de 2026.\n\n📌 O que segura a construção:\n• Expectativas em 50,2 pontos: o empresário ainda espera melhora nos próximos seis meses, mesmo que no limite\n• A avaliação do momento atual subiu 2,4 pontos, para 45,5\n\n⚠️ O ponto de atenção é o crédito. A construção tem ciclo longo e depende de financiamento, da empresa e do comprador. Com a Selic em 13,75% e os juros futuros em alta, o crédito imobiliário fica mais caro. No país, os juros altos já eram o principal problema para 4 em cada 10 empresários do setor no 3º trimestre.\n\nNa sua empresa, a confiança subiu ou caiu? Comenta! 👇\n\n➡️ Arraste para o lado.\n\n✍️ Por Higor Siqueira\n📰 Fonte: FIEG/CNI — ICEI de novembro, via @sinduscongo\n\n#constroigo #icei #confianca #construcaocivil #industria #fieg #sinduscongo #juros #goias #goiania"
+  "legenda": "🚨 ALERTA: a confiança despencou na indústria e na construção goiana.\n\nO Índice de Confiança do Empresário Industrial (ICEI) de novembro, da FIEG/CNI, acendeu o sinal vermelho:\n\n📉 Indústria goiana: o índice caiu para 39,5 pontos, o PIOR nível de 2026. As expectativas despencaram 3,7 pontos, para 39,7. O industrial já não espera um futuro melhor que o presente. No Brasil, o tombo foi de 6 pontos em um mês, para 40,2.\n\n🏗️ Construção civil: o ICEI caiu de 49,1 para 48,6 e completa SEIS MESES SEGUIDOS abaixo da linha dos 50 pontos, sem confiança. As expectativas recuaram 1,9 ponto e estão no limite, em 50,2.\n\n⚠️ O motivo é o crédito. Com a Selic em 13,75%, o dólar e os juros futuros em alta e a incerteza fiscal, o financiamento fica mais caro para a empresa e para quem compra imóvel. Os juros altos já eram o principal problema para 4 em cada 10 empresários da construção.\n\nMenos confiança hoje significa menos obras, menos investimento e menos empregos amanhã.\n\nSua empresa já está sentindo? Comenta! 👇\n\n➡️ Arraste para o lado.\n\n✍️ Por Higor Siqueira\n📰 Fonte: FIEG/CNI — ICEI de novembro, via @sinduscongo\n\n#constroigo #icei #confianca #construcaocivil #industria #fieg #sinduscongo #juros #selic #goias"
 }
