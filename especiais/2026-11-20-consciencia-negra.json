@@ -8,9 +8,11 @@
   "cards": [
     {
       "chamada": "Dia da Consciência Negra",
-      "tam_titulo": 104,
+      "tam_titulo": 88,
       "titulo": "Quem levanta o Brasil",
-      "texto": "Das cidades às estradas e ferrovias, trabalhadores negros ergueram o país. Neste 20 de novembro, os números mostram essa força e a desigualdade que ainda persiste."
+      "texto": "Das cidades às estradas e ferrovias, trabalhadores negros ergueram o país. Neste 20 de novembro, os números mostram essa força e a desigualdade que ainda persiste.",
+      "busca_foto": "construction worker silhouette sunset",
+      "categoria_foto": "OBRAS"
     },
     {
       "chamada": "A força do trabalho",
