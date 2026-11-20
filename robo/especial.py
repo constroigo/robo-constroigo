@@ -73,6 +73,8 @@ def main() -> None:
         reel = dados.get("reel")  # true força Reel, false desliga, ausente alterna
         if reel is not False and (reel is True or video.ativo()) and not (pasta / "video.mp4").exists():
             video.gerar(pasta / "post.jpg", pasta / "video.mp4")
+    from . import story
+    story.gerar(pasta / "post.jpg", pasta / "story.jpg", video=(pasta / "video.mp4").exists())
 
     post = {
         "categoria": dados.get("tag", "ESPECIAL"),

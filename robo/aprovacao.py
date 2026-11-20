@@ -21,6 +21,17 @@ def _cards(pasta: str) -> list[str]:
 
 
 def _publicar(pasta: str, post: dict) -> str:
+    link = _publicar_feed(pasta, post)
+    if os.environ.get("STORIES_AUTO", "sim").lower() != "nao" and (Path(pasta) / "story.jpg").exists():
+        try:
+            instagram.publicar_story(url_publica(pasta, "story.jpg"))
+            print("Story publicado.")
+        except Exception as erro:  # o post já saiu; o story é extra
+            print(f"Story não publicado: {erro}")
+    return link
+
+
+def _publicar_feed(pasta: str, post: dict) -> str:
     cards = _cards(pasta)
     if (Path(pasta) / "video.mp4").exists():  # Reel tem prioridade (inclusive carrossel convertido em vídeo)
         capa = url_publica(pasta) if (Path(pasta) / "post.jpg").exists() else None
