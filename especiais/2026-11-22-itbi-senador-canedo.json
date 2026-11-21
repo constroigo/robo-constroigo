@@ -7,11 +7,10 @@
   "fonte": "Fonte: LC nº 3.088/2026 (Diário Oficial de Senador Canedo, 18/11/2026) e ADU-GO",
   "cards": [
     {
-      "busca_foto": "land lots dirt roads earthwork new neighborhood",
-      "categoria_foto": "OBRAS",
       "tam_titulo": 80,
       "titulo": "Senador Canedo muda as regras dos loteamentos",
-      "texto": "Nova lei dá até 50% de desconto no ITBI pago durante as obras de infraestrutura. A mudança teve participação da ADU-GO."
+      "texto": "Nova lei dá até 50% de desconto no ITBI pago durante as obras de infraestrutura. A mudança teve participação da ADU-GO.",
+      "imagem": "especiais/img/senador-canedo-trevo.jpg"
     },
     {
       "chamada": "ITBI antecipado",
