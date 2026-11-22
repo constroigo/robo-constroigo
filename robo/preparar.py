@@ -17,10 +17,13 @@ from .config import FONTES_PREFERIDAS, HORARIOS, PATROCINADOR_POR_CATEGORIA, PAT
 FUSO = ZoneInfo("America/Sao_Paulo")
 
 
-def escolher_patrocinador(quando: datetime, horario: str, categoria: str = "") -> dict | None:
+def escolher_patrocinador(quando: datetime, horario: str, categoria: str = "", texto: str = "") -> dict | None:
     if not PATROCINADORES:
         return None
+    from .config import TERMOS_ALTO_PADRAO
     preferido = PATROCINADOR_POR_CATEGORIA.get(categoria.upper())
+    if any(t in texto.lower() for t in TERMOS_ALTO_PADRAO):
+        preferido = "Setmaier Engenharia"
     for p in PATROCINADORES:
         if p["nome"] == preferido:
             return p
@@ -60,7 +63,8 @@ def main() -> None:
         return
 
     post = redacao.escrever_post(lista, conf["rotulo"])
-    patrocinador = escolher_patrocinador(agora, horario, post.get("categoria", ""))
+    patrocinador = escolher_patrocinador(agora, horario, post.get("categoria", ""),
+                                        " ".join(str(post.get(k, "")) for k in ("manchete", "resumo", "legenda")))
 
     # Pasta única por execução, para dois posts do mesmo horário não se sobrescreverem.
     pasta = Path("posts") / f"{agora:%Y-%m-%d}-{horario}-{agora:%H%M%S}"

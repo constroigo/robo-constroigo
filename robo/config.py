@@ -69,6 +69,8 @@ PATROCINADORES = [
     {"nome": "H2R Incorp", "logo": "assets/patrocinadores/h2r-incorp.png"},
     {"nome": "H2R Energia", "logo": "assets/patrocinadores/h2r-energia.png"},
     # Parceiros externos: só entram quando escolhidos (post especial ou categoria), fora do rodízio.
+    {"nome": "Setmaier Engenharia", "logo": "assets/patrocinadores/setmaier.png", "rodizio": False,
+     "contato": ["@setmaierengenharia", "Casas de alto padrão em Goiás"]},
     {"nome": "Recurso Sustentável", "logo": "assets/patrocinadores/recurso-sustentavel.png", "rodizio": False},
 ]
 
@@ -85,9 +87,14 @@ PATROCINADOR_POR_CATEGORIA = {
     "ECONOMIA": "H2R Incorp",
     "NOVIDADE": "H2R Engenharia",
     "MEIO AMBIENTE": "Recurso Sustentável",
+    "ALTO PADRÃO": "Setmaier Engenharia",
 }
 
 HASHTAGS_FIXAS = ["#constroigo", "#construcaocivil", "#goias", "#goiania", "#engenharia"]
 
 # Só considera notícias publicadas nas últimas X horas.
 JANELA_HORAS = 48
+
+# Notícias sobre estes assuntos levam o oferecimento da Setmaier (casas de alto padrão, luxo, condomínios).
+TERMOS_ALTO_PADRAO = ["alto padrão", "luxo", "condomínio fechado", "condomínios fechados", "casa de luxo",
+                      "mansão", "mansões", "residencial de luxo", "alto luxo"]
