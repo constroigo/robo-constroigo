@@ -8,13 +8,13 @@
   "reel": false,
   "cards": [
     {
-      "imagem": "especiais/img/setmaier-podcast-capa-preto.jpg",
+      "imagem": "especiais/img/setmaier-podcast-capa.jpg",
       "credito_imagem": "Divulgação: Setmaier Engenharia",
       "tam_titulo": 70,
       "titulo": "O segredo das entregas impecáveis",
       "texto": "Novo episódio do podcast de Rafael Setmaier recebe os arquitetos do TTAD+.",
       "local": "",
-      "posicao_imagem": "center top"
+      "posicao_imagem": "center 30%"
     },
     {
       "imagem": "especiais/img/setmaier-podcast-mesa.jpg",
