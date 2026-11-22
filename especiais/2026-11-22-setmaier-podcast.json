@@ -4,7 +4,7 @@
   "titulo": "Além da Arquitetura: o segredo das entregas impecáveis",
   "patrocinador": "Setmaier Engenharia",
   "tema": "azul",
-  "fonte": "Podcast do canal Eng. Rafael Setmaier (YouTube)",
+  "fonte": "Podcast no YouTube: Eng. Rafael Setmaier",
   "reel": false,
   "cards": [
     {
@@ -12,7 +12,8 @@
       "credito_imagem": "Divulgação: Setmaier Engenharia",
       "tam_titulo": 70,
       "titulo": "O segredo das entregas impecáveis",
-      "texto": "Novo episódio do podcast de Rafael Setmaier recebe os arquitetos do TTAD+."
+      "texto": "Novo episódio do podcast de Rafael Setmaier recebe os arquitetos do TTAD+.",
+      "local": ""
     },
     {
       "imagem": "especiais/img/setmaier-podcast-mesa.jpg",
