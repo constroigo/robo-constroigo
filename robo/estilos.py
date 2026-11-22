@@ -29,6 +29,13 @@ TEMAS = {
         "bloco_a": "#FFFFFF", "bloco_b": "#0F2747", "bloco_c": "#F2B705",
         "go_bg": "#F2B705", "go_fg": "#0F2747", "caixa_bg": "#0F2747", "caixa_fg": "#F2B705",
     },
+    # Fora da rotação: posts de alto padrão / luxo, quando pedido.
+    "preto": {
+        "bg": "#0B0B0B", "texto": "#FFFFFF", "sub": "#D9D4C7", "destaque": "#C9A45C",
+        "tag_bg": "#C9A45C", "tag_fg": "#0B0B0B", "linha": "#3A3428",
+        "bloco_a": "#FFFFFF", "bloco_b": "#C9A45C", "bloco_c": "#8C7440",
+        "go_bg": "#F2B705", "go_fg": "#0F2747", "caixa_bg": "#C9A45C", "caixa_fg": "#0B0B0B",
+    },
     # Fora da rotação: só para posts de alerta/impacto, quando pedido.
     "vermelho": {
         "bg": "#B42318", "texto": "#FFFFFF", "sub": "#FBDAD6", "destaque": "#F2B705",
