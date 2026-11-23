@@ -94,7 +94,11 @@ def _abrir_manual(pasta: str, post: dict) -> None:
     pasta_p = Path(pasta)
     cards = _cards(pasta)
     tem_video = (pasta_p / "video.mp4").exists()
-    alertas = "".join(f"> ⚠️ {a}\n" for a in post.get("alertas", []))
+    lista = list(post.get("alertas", []))
+    if post["horario"] != "especial" and len(post.get("legenda", "")) < 150:
+        lista.append("Legenda curta: o robô não conseguiu ler o texto da notícia (site com paywall?). "
+                     "Complete a legenda ou descarte.")
+    alertas = "".join(f"> ⚠️ {a}\n" for a in lista)
     if alertas:
         alertas = "**Confira antes de postar:**\n" + alertas + "\n"
 
