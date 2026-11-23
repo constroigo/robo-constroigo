@@ -8,14 +8,17 @@
   "foto_autor": "assets/autores/celha-pela.png",
   "fonte": "Fonte: Prefeitura de Goiânia / O Hoje",
   "reel": false,
-  "colaboradores": ["celhapela"],
+  "colaboradores": [
+    "celhapela"
+  ],
   "cards": [
     {
-      "busca_foto": "house keys contract document",
-      "categoria_foto": "MERCADO IMOBILIÁRIO",
       "tam_titulo": 70,
       "titulo": "Habite-se passa a ser exigido para averbar imóveis em Goiânia",
-      "texto": "A regra vale a partir de 4 de janeiro de 2027, mas o prazo para escapar dela termina antes: 30 de dezembro."
+      "texto": "A regra vale a partir de 4 de janeiro de 2027, mas o prazo para escapar dela termina antes: 30 de dezembro.",
+      "imagem": "especiais/img/celha-pela-capa.jpg",
+      "credito_imagem": "Foto: divulgação",
+      "posicao_imagem": "center center"
     },
     {
       "chamada": "O que muda",
