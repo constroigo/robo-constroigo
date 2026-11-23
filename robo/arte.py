@@ -50,10 +50,13 @@ def _logo(patrocinador: dict | None) -> dict | None:
 
 
 def renderizar(template: str, contexto: dict, estilo: dict, destino: Path) -> Path:
+    contexto = dict(contexto)
+    autor = contexto.pop("autor", None) or AUTOR
+    foto = Path(contexto.pop("foto_autor", None) or FOTO)
     html = _env.get_template(template).render(
         e=estilo,
-        autor=AUTOR,
-        foto_uri=FOTO.resolve().as_uri() if FOTO.exists() else "",
+        autor=autor,
+        foto_uri=foto.resolve().as_uri() if foto.exists() else "",
         **contexto,
     )
     destino.parent.mkdir(parents=True, exist_ok=True)

@@ -20,8 +20,10 @@ FUSO = ZoneInfo("America/Sao_Paulo")
 def escolher_patrocinador(quando: datetime, horario: str, categoria: str = "", texto: str = "") -> dict | None:
     if not PATROCINADORES:
         return None
-    from .config import TERMOS_ALTO_PADRAO
+    from .config import TERMOS_ALTO_PADRAO, TERMOS_REGULARIZACAO
     preferido = PATROCINADOR_POR_CATEGORIA.get(categoria.upper())
+    if any(t in texto.lower() for t in TERMOS_REGULARIZACAO):
+        preferido = "Celha Pelá"
     if any(t in texto.lower() for t in TERMOS_ALTO_PADRAO):
         preferido = "Setmaier Engenharia"
     for p in PATROCINADORES:
@@ -31,6 +33,17 @@ def escolher_patrocinador(quando: datetime, horario: str, categoria: str = "", t
     ordem = list(HORARIOS).index(horario) if horario in HORARIOS else 0
     indice = (quando.timetuple().tm_yday * len(HORARIOS) + ordem) % len(rodizio)
     return rodizio[indice]
+
+
+def escolher_tema(categoria: str = "", texto: str = "") -> str:
+    """Linha editorial: vermelho alerta, preto luxo, branco mercado imobiliário, amarelo infraestrutura, azul o resto."""
+    from .config import TERMOS_ALERTA, TERMOS_ALTO_PADRAO, TEMA_POR_CATEGORIA
+    t = texto.lower()
+    if any(x in t for x in TERMOS_ALERTA):
+        return "vermelho"
+    if any(x in t for x in TERMOS_ALTO_PADRAO):
+        return "preto"
+    return TEMA_POR_CATEGORIA.get(categoria.upper(), "azul")
 
 
 def saida(nome: str, valor: str) -> None:
@@ -63,13 +76,15 @@ def main() -> None:
         return
 
     post = redacao.escrever_post(lista, conf["rotulo"])
-    patrocinador = escolher_patrocinador(agora, horario, post.get("categoria", ""),
-                                        " ".join(str(post.get(k, "")) for k in ("manchete", "resumo", "legenda")))
+    texto_post = " ".join(str(post.get(k, "")) for k in ("manchete", "resumo", "legenda"))
+    patrocinador = escolher_patrocinador(agora, horario, post.get("categoria", ""), texto_post)
+    from .arte import proximo_estilo
+    estilo = proximo_estilo(None, escolher_tema(post.get("categoria", ""), texto_post))
 
     # Pasta única por execução, para dois posts do mesmo horário não se sobrescreverem.
     pasta = Path("posts") / f"{agora:%Y-%m-%d}-{horario}-{agora:%H%M%S}"
     imagem = imagens.obter(post, pasta) if os.environ.get("USAR_IMAGENS", "sim").lower() != "nao" else None
-    gerar_arte(post, patrocinador, pasta / "post.jpg", agora, imagem=imagem)
+    gerar_arte(post, patrocinador, pasta / "post.jpg", agora, estilo=estilo, imagem=imagem)
     from . import video, story
     if video.ativo() and video.gerar(pasta / "post.jpg", pasta / "video.mp4"):
         print("Reel com vinheta gerado.")

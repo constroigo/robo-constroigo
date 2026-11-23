@@ -72,6 +72,8 @@ PATROCINADORES = [
     {"nome": "Setmaier Engenharia", "logo": "assets/patrocinadores/setmaier.png", "rodizio": False,
      "contato": ["@setmaierengenharia", "Casas de alto padrão em Goiás"]},
     {"nome": "Recurso Sustentável", "logo": "assets/patrocinadores/recurso-sustentavel.png", "rodizio": False},
+    {"nome": "Celha Pelá", "logo": "assets/patrocinadores/celha-pela.png", "rodizio": False,
+     "contato": ["@celhapela · (62) 98124-5267", "pelarquitetura@gmail.com"]},
 ]
 
 # Anunciante preferido por assunto do post (o resto entra em rodízio).
@@ -88,6 +90,8 @@ PATROCINADOR_POR_CATEGORIA = {
     "NOVIDADE": "H2R Engenharia",
     "MEIO AMBIENTE": "Recurso Sustentável",
     "ALTO PADRÃO": "Setmaier Engenharia",
+    "REGULARIZAÇÃO": "Celha Pelá",
+    "LEGISLAÇÃO": "Celha Pelá",
 }
 
 HASHTAGS_FIXAS = ["#constroigo", "#construcaocivil", "#goias", "#goiania", "#engenharia"]
@@ -98,3 +102,22 @@ JANELA_HORAS = 48
 # Notícias sobre estes assuntos levam o oferecimento da Setmaier (casas de alto padrão, luxo, condomínios).
 TERMOS_ALTO_PADRAO = ["alto padrão", "luxo", "condomínio fechado", "condomínios fechados", "casa de luxo",
                       "mansão", "mansões", "residencial de luxo", "alto luxo"]
+
+# Regularização e documentação de imóveis levam o oferecimento da arquiteta Celha Pelá.
+TERMOS_REGULARIZACAO = ["averbação", "averbar", "habite-se", "regularização", "regularizar", "escritura",
+                        "matrícula do imóvel", "cartório", "usucapião", "reurb", "certidão de conclusão",
+                        "documentação do imóvel", "georreferenciamento"]
+
+# Linha editorial de cores (tema do card por tipo de notícia).
+#   vermelho = alerta | azul = notícias do dia a dia | claro (branco) = mercado imobiliário e incorporação
+#   amarelo = máquinas, equipamentos e infraestrutura | preto = alto padrão e luxo
+TEMA_POR_CATEGORIA = {
+    "MERCADO IMOBILIÁRIO": "claro",
+    "INFRAESTRUTURA": "amarelo",
+    "MÁQUINAS E EQUIPAMENTOS": "amarelo",
+    "SANEAMENTO": "amarelo",
+    "ENERGIA": "amarelo",
+    "ALTO PADRÃO": "preto",
+}
+TERMOS_ALERTA = ["alerta", "atenção", "prazo final", "último prazo", "multa", "despenca", "desaba",
+                 "interdição", "interditad", "colapso", "risco de"]
