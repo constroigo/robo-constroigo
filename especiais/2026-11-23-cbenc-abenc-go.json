@@ -1,0 +1,42 @@
+{
+  "tag": "ENGENHARIA",
+  "local": "CURITIBA",
+  "titulo": "Goiás no 31º Congresso Brasileiro de Engenheiros Civis",
+  "patrocinador": "H2R Engenharia",
+  "fonte": "Fonte: Abenc-GO e Confea",
+  "reel": false,
+  "colaboradores": ["abencgoias"],
+  "cards": [
+    {
+      "imagem": "especiais/img/cbenc-abenc-go.jpg",
+      "credito_imagem": "Foto: @abencgoias",
+      "posicao_imagem": "center 30%",
+      "tam_titulo": 70,
+      "titulo": "Goiás no 31º Congresso Brasileiro de Engenheiros Civis",
+      "texto": "Comitiva da Abenc-GO participou do CBENC, em Curitiba, de 4 a 6 de novembro."
+    },
+    {
+      "chamada": "A comitiva goiana",
+      "titulo": "Quem representou Goiás",
+      "itens": [
+        "Presidente da Abenc-GO: @victorresende.eng",
+        "1º vice-presidente: @dioguinhoveloso",
+        "Diretor financeiro: @edsonponciano",
+        "Presidente eleita do Crea-GO: @tatianajuca.eng",
+        "Além de associados, diretores e conselheiros"
+      ]
+    },
+    {
+      "chamada": "Em pauta",
+      "titulo": "O futuro da engenharia civil",
+      "itens": [
+        "Infraestrutura, habitação e saneamento",
+        "Desenvolvimento sustentável do país",
+        "Evento da Abenc nacional, no Instituto de Engenharia do Paraná",
+        "Tatiana Jucá será a 1ª mulher a presidir o Crea-GO, a partir de 2027"
+      ],
+      "texto": "Você acompanha os congressos da engenharia? Comenta!"
+    }
+  ],
+  "legenda": "🏗️ Goiás marcou presença no 31º Congresso Brasileiro de Engenheiros Civis (CBENC), realizado de 4 a 6 de novembro no Instituto de Engenharia do Paraná, em Curitiba.\n\nA comitiva da @abencgoias foi liderada pelo presidente @victorresende.eng, ao lado do 1º vice-presidente @dioguinhoveloso, do diretor financeiro @edsonponciano e da presidente eleita do Crea-GO, @tatianajuca.eng, que a partir de 2027 será a primeira mulher a comandar o conselho em Goiás.\n\nAssociados, diretores e conselheiros da entidade também participaram dos debates sobre os rumos da engenharia civil brasileira: infraestrutura, habitação, saneamento e desenvolvimento sustentável.\n\nParabéns à Abenc-GO por levar a engenharia goiana para o debate nacional! 👏\n\nVocê acompanha os congressos da engenharia? Comenta! 👇\n\n➡️ Arraste para o lado.\n\n✍️ Por Higor Siqueira\n📸 Foto: @abencgoias\n\n#constroigo #cbenc #abenc #abencgo #engenhariacivil #creago #engenharia #goias #goiania #curitiba"
+}
