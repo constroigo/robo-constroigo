@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: robo-constroigo
@@ -46,18 +47,20 @@ jobs:
           git add posts/stories
           git commit -m "Story de frase" || true
           git pull --rebase && git push
-      - name: Publicar o story
+      - name: Publicar o story (ou abrir pacote manual)
         if: steps.prep.outputs.arquivo != ''
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
         run: |
+          ARQ='${{ steps.prep.outputs.arquivo }}'
+          if [ -f data/modo-manual ]; then python -m robo.aprovacao --story "$ARQ"; exit 0; fi
           sleep 20
           python -c "
           from robo import instagram
           from robo.aprovacao import url_publica
           import os
-          arq = '${{ steps.prep.outputs.arquivo }}'
-          pasta, nome = os.path.split(arq)
+          pasta, nome = os.path.split('$ARQ')
           print(instagram.publicar_story(url_publica(pasta, nome)))
           "
