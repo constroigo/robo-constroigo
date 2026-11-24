@@ -9,11 +9,12 @@
   "selo": "Constrói GO",
   "cards": [
     {
-      "imagem": "especiais/img/serra-dourada-atual.jpg",
-      "credito_imagem": "Imagem: Arena Serra Dourada",
+      "imagem": "especiais/img/flamboyant-palmeiras.jpg",
+      "credito_imagem": "Foto: reprodução",
       "tam_titulo": 76,
       "titulo": "A Dubai do Cerrado",
-      "texto": "Shopping, arena, hospital e condomínios de luxo: o leste e o sudeste de Goiânia concentram os maiores investimentos da capital."
+      "texto": "Shopping, arena, hospital e condomínios de luxo: o leste e o sudeste de Goiânia concentram os maiores investimentos da capital.",
+      "posicao_imagem": "center 40%"
     },
     {
       "chamada": "R$ 1,5 bilhão",

@@ -8,11 +8,12 @@
   "reel": false,
   "cards": [
     {
-      "busca_foto": "construction workers team building site",
-      "categoria_foto": "OBRAS",
       "tam_titulo": 78,
-      "titulo": "Você já viu os detalhes da escala 5x2?",
-      "texto": "O Ministério do Trabalho publicou a portaria que diz como fica a jornada na prática. Começa em 16 de dezembro."
+      "titulo": "Jornada de 42 horas começa em 16 de dezembro",
+      "texto": "O Ministério do Trabalho publicou a portaria que explica, na prática, como fica a escala 5x2. Arraste e veja o que muda.",
+      "imagem": "especiais/img/escala-5x2-capa.jpg",
+      "credito_imagem": "",
+      "posicao_imagem": "center center"
     },
     {
       "chamada": "O calendário",
