@@ -99,6 +99,21 @@ def _normal(t: str) -> str:
     return re.sub(r"[^a-z0-9 ]", "", (t or "").lower())
 
 
+CONECTIVOS = ("de ", "do ", "da ", "dos ", "das ", "em ", "no ", "na ", "nos ", "nas ", "a ", "o ", "para ", "com ")
+
+
+def _manchete_solta(manchete: str, destaque: str) -> str:
+    """Sem destaque (ou se a revisão o removeu), a manchete não pode começar como continuação de frase."""
+    if destaque or not manchete:
+        return manchete
+    m = manchete
+    while m.lower().startswith(CONECTIVOS):
+        m = m.split(" ", 1)[1] if " " in m else m
+        if not m.lower().startswith(CONECTIVOS):
+            break
+    return m[:1].upper() + m[1:]
+
+
 def _numeros(texto: str) -> set[str]:
     return set(re.findall(r"\d+(?:[.,]\d+)*", texto or ""))
 
@@ -175,7 +190,7 @@ def escrever_post(noticias: list[dict], tema: str) -> dict:
     noticia = noticias[int(post["escolhida"])]
     post = _revisar(post, noticia, chave)
     post["noticia"] = noticia
-    post["manchete"] = post["manchete"].strip().rstrip(".")[:110]
+    post["manchete"] = _manchete_solta(post["manchete"].strip().rstrip(".")[:110], post.get("destaque", ""))
     post["resumo"] = post["resumo"].strip()[:180]
     pm, pr = set(_normal(post["manchete"]).split()), set(_normal(post["resumo"]).split())
     if pr and len(pm & pr) / max(len(pr), 1) > 0.6:

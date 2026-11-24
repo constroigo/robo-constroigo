@@ -79,7 +79,7 @@ def gerar_arte(post: dict, patrocinador: dict | None, destino: Path, quando: dat
     tam_destaque, tam_manchete = _tamanhos(post.get("destaque", ""), post["manchete"])
     contexto = {
         "tag": post["categoria"],
-        "local": f"{post.get('local') or 'GOIÁS'} · {quando.day:02d} {MESES[quando.month - 1]} {quando.year}",
+        "local": post.get('local') or 'GOIÁS',  # sem data: o post pode sair em outro dia
         "destaque": post.get("destaque", ""),
         "manchete": _sem_quebra_no_hifen(post["manchete"]),
         "resumo": post["resumo"],
