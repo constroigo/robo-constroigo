@@ -1,0 +1,57 @@
+{
+  "tag": "OBRAS",
+  "local": "JARDIM GOIÁS",
+  "titulo": "O novo Complexo Serra Dourada",
+  "patrocinador": "H2R Engenharia",
+  "tema": "amarelo",
+  "fonte": "Fonte: Arena Serra Dourada / Governo de Goiás",
+  "reel": false,
+  "cards": [
+    {
+      "imagem": "especiais/img/serra-dourada-show.jpg",
+      "credito_imagem": "Imagem: projeto Arena Serra Dourada",
+      "tam_titulo": 72,
+      "titulo": "O novo Serra Dourada: estádio, arena e parque num só complexo",
+      "texto": "Projeto de requalificação com investimento privado de mais de R$ 300 milhões e entrega prevista para 2028."
+    },
+    {
+      "imagem": "especiais/img/serra-dourada-salao.jpg",
+      "credito_imagem": "Imagem: projeto Arena Serra Dourada",
+      "chamada": "O estádio",
+      "titulo": "Até 44 mil torcedores e 60 mil pessoas em shows",
+      "texto": "Novas cadeiras, camarotes e espaços VIP climatizados, acessibilidade em todos os níveis e um salão de eventos de frente para o pôr do sol."
+    },
+    {
+      "imagem": "especiais/img/goiania-arena-fachada.jpg",
+      "credito_imagem": "Imagem: projeto Arena Serra Dourada",
+      "chamada": "Goiânia Arena",
+      "titulo": "Uma arena indoor para grandes shows",
+      "texto": "O ginásio ganha nova fachada e estrutura para receber a melhor programação de eventos do país."
+    },
+    {
+      "imagem": "especiais/img/serra-dourada-pista.jpg",
+      "credito_imagem": "Imagem: projeto Arena Serra Dourada",
+      "chamada": "Uso diário",
+      "titulo": "Parque aberto para a cidade",
+      "itens": [
+        "Parque linear com pista de corrida e ciclovia",
+        "Novo complexo esportivo com campo e quadras",
+        "Paisagismo com espécies do Cerrado",
+        "Parque da Criança revitalizado"
+      ]
+    },
+    {
+      "chamada": "Os números",
+      "titulo": "Uma concessão de 35 anos",
+      "itens": [
+        "Gestão do Grupo Construcap, o mesmo do Mineirão",
+        "Investimento privado acima de R$ 300 milhões",
+        "Obras de maio de 2026 a 2028",
+        "Estádio, Goiânia Arena e Parque Poliesportivo",
+        "Marca inspirada na flor do pequi"
+      ],
+      "texto": "Qual show você quer ver no novo Serra Dourada? Comenta!"
+    }
+  ],
+  "legenda": "🏟️ O novo Complexo Serra Dourada vai mudar a cara de Goiânia!\n\nO projeto de requalificação, conduzido pelo Grupo Construcap, que assumiu a concessão por 35 anos, prevê investimento privado acima de R$ 300 milhões, com obras de 2026 a 2028. E não é só uma reforma: o complexo vira um distrito de esporte, cultura e lazer de uso diário.\n\n⚽ Estádio: capacidade para até 44 mil torcedores e 60 mil pessoas em shows, novas cadeiras, camarotes e espaços VIP climatizados, acessibilidade em todos os níveis e anel de circulação com bares e restaurantes.\n\n🌅 Novo salão de eventos de frente para o pôr do sol mais charmoso de Goiânia.\n\n🎤 Goiânia Arena com nova fachada, pensada para receber grandes shows.\n\n🌳 Parque linear com pista de corrida e ciclovia, novo complexo esportivo, paisagismo com espécies do Cerrado e o Parque da Criança revitalizado.\n\n🌼 Até a marca nova tem a cara de Goiás: é inspirada na flor do pequi.\n\nUm projeto que preserva a arquitetura histórica do Serra e devolve o complexo para a cidade. 👏\n\nQual show você quer ver no novo Serra Dourada? 👇\n\n➡️ Arraste para o lado.\n\n✍️ Por Higor Siqueira\n📸 Imagens: projeto Arena Serra Dourada\n🤝 Oferecimento: H2R Engenharia (@h2rengenhariagoiania)\n\n#constroigo #serradourada #goianiaarena #construcap #estadio #arquitetura #construcaocivil #goiania #goias #jardimgoias"
+}
