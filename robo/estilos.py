@@ -37,6 +37,13 @@ TEMAS = {
         "go_bg": "#F2B705", "go_fg": "#0F2747", "caixa_bg": "#C9A45C", "caixa_fg": "#0B0B0B",
     },
     # Fora da rotação: só para posts de alerta/impacto, quando pedido.
+    # Fora da rotação: meio ambiente e sustentabilidade.
+    "verde": {
+        "bg": "#1E5B3A", "texto": "#FFFFFF", "sub": "#D3E8DA", "destaque": "#F2B705",
+        "tag_bg": "#F2B705", "tag_fg": "#14321F", "linha": "#3F7D58",
+        "bloco_a": "#FFFFFF", "bloco_b": "#9CCFAE", "bloco_c": "#F2B705",
+        "go_bg": "#F2B705", "go_fg": "#0F2747", "caixa_bg": "#F2B705", "caixa_fg": "#14321F",
+    },
     "vermelho": {
         "bg": "#B42318", "texto": "#FFFFFF", "sub": "#FBDAD6", "destaque": "#F2B705",
         "tag_bg": "#FFFFFF", "tag_fg": "#B42318", "linha": "#D2584D",

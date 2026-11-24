@@ -111,7 +111,12 @@ TERMOS_REGULARIZACAO = ["averbação", "averbar", "habite-se", "regularização"
 # Linha editorial de cores (tema do card por tipo de notícia).
 #   vermelho = alerta | azul = notícias do dia a dia | claro (branco) = mercado imobiliário e incorporação
 #   amarelo = máquinas, equipamentos e infraestrutura | preto = alto padrão e luxo
+#   verde = meio ambiente e sustentabilidade
+# Nos especiais: "selo" (ex.: "Constrói GO esteve lá") e "especialista": true (moldura dourada
+# para textos assinados por convidados).
 TEMA_POR_CATEGORIA = {
+    "MEIO AMBIENTE": "verde",
+    "SUSTENTABILIDADE": "verde",
     "MERCADO IMOBILIÁRIO": "claro",
     "INFRAESTRUTURA": "amarelo",
     "MÁQUINAS E EQUIPAMENTOS": "amarelo",

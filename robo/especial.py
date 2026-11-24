@@ -33,7 +33,7 @@ def main() -> None:
     for i, card in enumerate(cards, start=1):
         base = {**dados, **card}
         contexto = {k: base.get(k) for k in ("tag", "chamada", "titulo", "mostrar_marca", "texto", "itens", "local",
-                                              "autor", "foto_autor")}
+                                              "autor", "foto_autor", "selo", "especialista")}
         contexto["fonte"] = base.get("fonte") or base.get("sub")
         contexto["patrocinador"] = _logo(patrocinador)
         destino = pasta / ("post.jpg" if len(cards) == 1 else f"post-{i}.jpg")

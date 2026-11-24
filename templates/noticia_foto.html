@@ -43,15 +43,19 @@
   .credito { display: flex; align-items: center; gap: 16px; }
   .credito .autor { font-size: 22px; font-weight: 700; text-align: right; }
   .credito .fonte { font-size: 18px; color: {{ e.sub }}; text-align: right; }
+  .selos { display: flex; align-items: center; gap: 12px; }
+  .selo { background: #C9A45C; color: #0B0B0B; font-weight: 800; font-size: 20px; padding: 10px 16px;
+          border-radius: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .post.especialista { box-shadow: inset 0 0 0 12px #C9A45C; }
 </style>
 </head>
 <body>
-<div class="post">
+<div class="post{% if especialista %} especialista{% endif %}">
   <div class="foto">
     <img class="bg" src="{{ imagem.uri }}" alt="" {% if imagem.posicao %}style="object-position: {{ imagem.posicao }}"{% endif %}>
     <div class="sombra" {% if imagem.clara %}style="background: linear-gradient(180deg, rgba(15,39,71,0.28) 0%, rgba(15,39,71,0) 22%);"{% endif %}></div>
     <div class="topo">
-      <span class="tag">{{ tag }}</span>
+      <span class="selos"><span class="tag">{{ tag }}</span>{% if selo %}<span class="selo">{{ selo }}</span>{% endif %}</span>
       {% if local %}<span class="local" {% if imagem.clara %}style="color: #0F2747; text-shadow: none"{% endif %}>{{ local }}</span>{% endif %}
     </div>
     {% if imagem.credito %}<span class="credito-foto">{{ imagem.credito }}</span>{% endif %}
