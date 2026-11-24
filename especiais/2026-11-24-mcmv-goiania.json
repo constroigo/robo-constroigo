@@ -1,0 +1,40 @@
+{
+  "tag": "MERCADO IMOBILIÁRIO",
+  "local": "GOIÂNIA",
+  "titulo": "Vendas do Minha Casa, Minha Vida disparam em Goiânia",
+  "patrocinador": "Histórias Helvécia",
+  "tema": "claro",
+  "fonte": "Fonte: Ademi-GO / Brain e IMB",
+  "reel": false,
+  "cards": [
+    {
+      "imagem": "especiais/img/mcmv-goiania.jpg",
+      "credito_imagem": "Foto: Prefeitura de Goiânia",
+      "tam_titulo": 72,
+      "titulo": "Vendas do Minha Casa, Minha Vida sobem 83% em Goiânia",
+      "texto": "Mas o estoque de imóveis do programa encolheu, e o setor alerta para falta de oferta."
+    },
+    {
+      "chamada": "1º semestre de 2026",
+      "titulo": "Os números da Ademi-GO",
+      "itens": [
+        "2.944 unidades do MCMV vendidas, alta de 83,4%",
+        "Lançamentos subiram 77,1%: 2.395 imóveis",
+        "Estoque disponível caiu 33,2% desde o fim de 2025",
+        "MCMV é só 17% do estoque da capital"
+      ]
+    },
+    {
+      "chamada": "O alerta",
+      "titulo": "Demanda alta, oferta curta",
+      "itens": [
+        "171.284 famílias em déficit habitacional em Goiás (IMB, dados de 2024)",
+        "50.591 delas na Região Metropolitana de Goiânia",
+        "Ademi-GO aponta demora na aprovação de projetos pela Prefeitura",
+        "Risco: preço mais alto e projetos parados na gaveta"
+      ],
+      "texto": "Você sente que ficou mais difícil achar imóvel no MCMV? Comenta!"
+    }
+  ],
+  "legenda": "🏘️ Vendas do Minha Casa, Minha Vida disparam 83% em Goiânia, mas o estoque está acabando.\n\nSegundo a Ademi-GO, com dados da Brain, Goiânia vendeu 2.944 unidades do programa no 1º semestre de 2026, alta de 83,4% sobre o mesmo período de 2025. Os lançamentos também cresceram 77,1%, chegando a 2.395 imóveis.\n\n⚠️ O problema: as unidades disponíveis para venda caíram 33,2% em relação ao fim do ano passado, e os imóveis do MCMV já são só 17% do estoque da capital.\n\nEnquanto isso, a demanda segue alta. Estudo do Instituto Mauro Borges aponta 171.284 famílias em déficit habitacional em Goiás (dados de 2024), 50.591 delas na Região Metropolitana de Goiânia.\n\nA Ademi-GO aponta a demora na aprovação de empreendimentos pela Prefeitura como um freio na oferta. O presidente da entidade, Felipe Melazzo, alerta para o risco de quebra de oferta, com preço mais alto para o consumidor e projetos parados na gaveta.\n\nVocê sente que ficou mais difícil encontrar imóvel no MCMV? 👇\n\n➡️ Arraste para o lado.\n\n✍️ Por Higor Siqueira\n📰 Fonte: Ademi-GO / Brain e Instituto Mauro Borges\n🤝 Oferecimento: Histórias Helvécia\n\n#constroigo #minhacasaminhavida #mcmv #mercadoimobiliario #ademigo #habitacao #goiania #goias #incorporacao #imoveis"
+}
