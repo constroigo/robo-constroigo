@@ -1,0 +1,57 @@
+{
+  "tag": "ENERGIA",
+  "local": "PATOS DE MINAS (MG)",
+  "titulo": "Média tensão feita no Brasil",
+  "patrocinador": "H2R Energia",
+  "tema": "preto",
+  "fonte": "Fonte: Flávio Santana / Grupo Ener e MME",
+  "reel": false,
+  "colaboradores": [
+    "flaviosantanagrupoener"
+  ],
+  "cards": [
+    {
+      "imagem": "especiais/img/setta-fabrica.jpg",
+      "credito_imagem": "Foto: @flaviosantanagrupoener",
+      "tam_titulo": 70,
+      "titulo": "Grupo Ener visita fábrica da Setta de olho no leilão de baterias",
+      "texto": "O CEO Flávio Santana foi a Patos de Minas avaliar a Setta como parceira em média tensão para os projetos de armazenamento."
+    },
+    {
+      "chamada": "O contexto",
+      "titulo": "LRCap: os primeiros leilões só de baterias",
+      "itens": [
+        "2/12: Armazenamento Nacional, com conteúdo local",
+        "4/12: Armazenamento, aberto a todos",
+        "Contratos de 15 anos, suprimento a partir de agosto de 2028",
+        "Toda bateria precisa de um pacote de média tensão até a rede (SIN)"
+      ]
+    },
+    {
+      "imagem": "especiais/img/setta-cnc.jpg",
+      "credito_imagem": "Foto: @flaviosantanagrupoener",
+      "chamada": "O que chamou atenção",
+      "titulo": "Do aço ao painel, sob o mesmo teto",
+      "texto": "Chaparia feita em máquinas CNC na própria fábrica: menos dependência de terceiros e mais controle de prazo."
+    },
+    {
+      "imagem": "especiais/img/setta-cubiculos.jpg",
+      "credito_imagem": "Foto: @flaviosantanagrupoener",
+      "chamada": "Média tensão",
+      "titulo": "Cubículos inspecionados um a um",
+      "texto": "TCs e TPs de fabricação própria, área de ensaios na planta e etiqueta de aprovação em cada unidade."
+    },
+    {
+      "chamada": "Por que importa",
+      "titulo": "Fabricação nacional entra no jogo",
+      "itens": [
+        "Conteúdo local pesa no leilão de 2/12",
+        "Verticalização reduz risco de prazo",
+        "Média e baixa tensão com um só fornecedor",
+        "Próximos passos: ensaios de tipo, volume e cronograma"
+      ],
+      "texto": "Armazenamento de energia é a nova fronteira da infraestrutura. Você acompanha o leilão?"
+    }
+  ],
+  "legenda": "⚡ Média tensão feita no Brasil para o leilão de baterias.\n\nO CEO do Grupo Ener, @flaviosantanagrupoener, esteve em Patos de Minas (MG) para conhecer o escritório e a fábrica da Setta e avaliar a empresa como parceira em média tensão para os projetos da Ener no Brasil, em especial os do LRCap.\n\n🔋 O contexto: em 2 e 4 de dezembro acontecem os primeiros leilões de reserva de capacidade só para baterias do país. O primeiro exige conteúdo nacional; o segundo é aberto. Os contratos são de 15 anos, com início em agosto de 2028.\n\nE toda bateria precisa de um pacote de média tensão confiável até a rede: cubículos, proteção, medição e eletrocentros. Nesse elo, prazo, qualidade e fabricação nacional fazem diferença.\n\n🏭 O que chamou atenção na visita:\n🔹 Chaparia dos painéis feita na própria fábrica, em máquinas CNC\n🔹 TCs e TPs próprios e área de ensaios na planta\n🔹 Cubículos de média tensão inspecionados um a um, com etiqueta de aprovação\n🔹 A mesma linha faz baixa tensão, CCMs e eletrocentros\n\nOs próximos passos são aprofundar ensaios de tipo, capacidade para volume e cronogramas alinhados aos projetos.\n\nArmazenamento de energia é a nova fronteira da infraestrutura brasileira. Você está acompanhando o leilão? 👇\n\n➡️ Arraste para o lado.\n\n✍️ Por Higor Siqueira\n📸 Fotos: @flaviosantanagrupoener\n🤝 Oferecimento: H2R Energia\n\n#constroigo #bess #armazenamentodeenergia #lrcap #leilaodebaterias #mediatensao #setoreletrico #energia #industria #goias"
+}
