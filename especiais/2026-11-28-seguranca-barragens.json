@@ -1,0 +1,60 @@
+{
+  "tag": "ALERTA",
+  "local": "GOIÁS",
+  "titulo": "Segurança de barragens",
+  "patrocinador": "H2R Engenharia",
+  "tema": "vermelho",
+  "fonte": "Fonte: Lei 12.334/2010 e Semad-GO",
+  "reel": false,
+  "cards": [
+    {
+      "imagem": "especiais/img/h2r-barragem-2.jpg",
+      "credito_imagem": "Foto: H2R Engenharia",
+      "tam_titulo": 72,
+      "titulo": "Sua barragem está dando sinais. Você está vendo?",
+      "texto": "Barragem raramente rompe de uma hora para outra. Os sinais aparecem antes, e corrigir cedo custa pouco."
+    },
+    {
+      "chamada": "Sinais de alerta",
+      "titulo": "O que observar no maciço",
+      "itens": [
+        "Surgência: água brotando no pé do talude",
+        "Água turva saindo do maciço: possível piping",
+        "Trincas no coroamento ou nos taludes",
+        "Erosões, tocas e árvores no maciço",
+        "Vertedouro obstruído ou subdimensionado"
+      ]
+    },
+    {
+      "imagem": "especiais/img/barragem-filtro-de-pe.jpg",
+      "credito_imagem": "Ilustração: Constrói GO",
+      "chamada": "Corrigir cedo",
+      "titulo": "Filtro de pé: a água sai, o solo fica",
+      "texto": "Uma surgência de água limpa pode ser controlada com filtro ou dreno de pé, em areia e brita na granulometria certa. Ignorada, pode evoluir para erosão interna."
+    },
+    {
+      "chamada": "A lei",
+      "titulo": "O que exige a Lei de Segurança de Barragens",
+      "itens": [
+        "Lei 12.334/2010, alterada pela Lei 14.066/2020",
+        "PSB: Plano de Segurança da Barragem",
+        "ISR e ISE: inspeções regular e especial",
+        "RPSB e PAE: revisão periódica e plano de emergência",
+        "Em Goiás, a fiscalização é da Semad"
+      ]
+    },
+    {
+      "chamada": "Dicas para quem tem barragem",
+      "titulo": "Pequena ou grande, precisa de cuidado",
+      "itens": [
+        "Cadastre a barragem na Semad",
+        "Inspecione após cada período chuvoso",
+        "Mantenha roçada e vertedouro limpos",
+        "Não deixe árvores crescerem no maciço",
+        "Sempre com profissional habilitado e ART"
+      ],
+      "texto": "A H2R Engenharia executa reforço e recuperação de barragens. RT da obra atual: Eng. Marcos Borges."
+    }
+  ],
+  "legenda": "⚠️ Sua barragem está dando sinais. Você está vendo?\n\nBarragem de terra raramente rompe de uma hora para outra. Antes, ela avisa. E os sinais começam pequenos, quando a correção ainda é simples e barata.\n\n🔎 Fique de olho:\n🔹 Surgência: água brotando no pé do talude\n🔹 Água turva saindo do maciço, sinal de possível piping (erosão interna)\n🔹 Trincas no coroamento ou nos taludes\n🔹 Erosões, tocas de animais e árvores no maciço\n🔹 Vertedouro obstruído ou pequeno demais, risco de galgamento\n\n🛠️ Identificada cedo, uma surgência de água limpa pode ser controlada com um filtro ou dreno de pé. Uma trinca pode pedir a recomposição do aterro, compactado em camadas. Ignorados, esses sinais podem levar à ruptura, com dano ambiental, perda da propriedade e risco à vida de quem está rio abaixo.\n\n📜 A Lei 12.334/2010, alterada pela Lei 14.066/2020, exige das barragens enquadradas plano de segurança, inspeções regulares e especiais, revisão periódica e plano de ação de emergência. Em Goiás, a fiscalização é da Semad. E vale para qualquer porte: barragem pequena também precisa de manutenção.\n\n👷 A H2R Engenharia executa reforço e recuperação de barragens há anos e tem uma obra dessas em andamento agora, com o Eng. Marcos Borges como responsável técnico.\n\nTem barragem na sua propriedade ou empresa? Procure sempre um profissional legalmente habilitado, com ART.\n\n➡️ Arraste para o lado.\n\n✍️ Por Eng. Higor Siqueira\n🤝 Oferecimento: H2R Engenharia (@h2rengenhariagoiania)\n\n#constroigo #segurancadebarragens #barragem #geotecnia #engenhariacivil #drenagem #meioambiente #agro #goias #h2rengenharia"
+}
