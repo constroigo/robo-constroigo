@@ -1,0 +1,41 @@
+name: Narrar roteiro (TTS)
+on:
+  workflow_dispatch:
+    inputs:
+      roteiro:
+        description: "JSON com a lista de falas (campo 'falas')"
+        required: true
+      voz:
+        description: "Voz edge-tts"
+        default: "pt-BR-AntonioNeural"
+      velocidade:
+        default: "+4%"
+permissions:
+  contents: write
+jobs:
+  narrar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install edge-tts
+      - name: Gerar áudios
+        run: |
+          python - <<'PY'
+          import json, asyncio, os, edge_tts
+          r = json.load(open("${{ inputs.roteiro }}"))
+          out = os.path.splitext("${{ inputs.roteiro }}")[0] + "-audio"
+          os.makedirs(out, exist_ok=True)
+          async def go():
+              for i, f in enumerate(r["falas"], 1):
+                  c = edge_tts.Communicate(f, "${{ inputs.voz }}", rate="${{ inputs.velocidade }}")
+                  await c.save(f"{out}/{i:02d}.mp3")
+                  print(i, "ok")
+          asyncio.run(go())
+          PY
+      - name: Commit
+        run: |
+          git config user.name "robo-constroigo"; git config user.email "robo@users.noreply.github.com"
+          git add -A; git commit -m "Narração gerada" || exit 0
+          git pull --rebase; git push
